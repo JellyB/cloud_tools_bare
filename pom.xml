@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>spring-cloud-hystrix-dashboard</module>
+        <module>spring-boot-admin-dashboard</module>
     </modules>
     <parent>
         <groupId>com.huatu</groupId>
@@ -18,22 +19,5 @@
 
     <packaging>pom</packaging>
 
-    <properties>
-        <spring-boot-admin.version>1.5.4</spring-boot-admin.version>
-    </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server</artifactId>
-                <version>1.5.4</version>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-ui</artifactId>
-                <version>1.5.4</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>
