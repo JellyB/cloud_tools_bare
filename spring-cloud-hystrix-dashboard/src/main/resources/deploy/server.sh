@@ -1,24 +1,38 @@
 #!/bin/bash
 cd `dirname $0`
 
+
 # 使用自己的conf文件传递到spring启动脚本种
 source ./conf/run.conf
+
+
+DEPLOY_DIR=`pwd`
+
+SERVER_NAME=${server_name}
+
+if [ -z "$SERVER_NAME" ]; then
+    echo 'package error,cant get server name!'
+    exit 1;
+fi
+
+LOGS_DIR=${log_dir}
+if [ -z "$LOGS_DIR:" ]; then
+    LOGS_DIR=/app/logs/${server_name}/
+fi
+if [ ! -d ${LOGS_DIR} ]; then
+    mkdir -p ${LOGS_DIR}
+fi
 
 if [ $ENV = "product" ]; then
     # 线上环境增加全异步日志
     $JAVA_OPTS=$JAVA_OPTS" -DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector -DAsyncLogger.WaitStrategy=busyspin"
 fi
 
+
+
+
+
 do_dump(){
-    cd `dirname $0`
-    DEPLOY_DIR=`pwd`
-
-    SERVER_NAME=${server_name}
-
-    if [ -z "$SERVER_NAME" ]; then
-        echo 'package error,cant get server name!'
-        exit 1;
-    fi
 
     PIDS=`ps -ef | grep java | grep "$DEPLOY_DIR" |awk '{print $2}'`
     if [ -z "$PIDS" ]; then
@@ -26,13 +40,6 @@ do_dump(){
         exit 1
     fi
 
-    LOGS_DIR=${log_dir}
-    if [ -z "$LOGS_DIR:" ]; then
-        LOGS_DIR=/var/log/${server_name}/
-    fi
-    if [ ! -d ${LOGS_DIR} ]; then
-        mkdir -p ${LOGS_DIR}
-    fi
     DUMP_DIR=${LOGS_DIR}/dump
     if [ ! -d ${DUMP_DIR} ]; then
         mkdir -p ${DUMP_DIR}
