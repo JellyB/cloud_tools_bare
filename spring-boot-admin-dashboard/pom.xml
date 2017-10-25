@@ -17,6 +17,7 @@
         <!-- filter -->
         <server_name>spring-boot-admin-dashboard</server_name>
         <log_dir>/app/logs/${server_name}</log_dir>
+        <pid_dir>/app/data/run</pid_dir>
     </properties>
 
     <dependencies>
@@ -93,6 +94,7 @@
                         <!--默认的就可以-->
                         <confFolder>./conf</confFolder>
                         <logFolder>${log_dir}/</logFolder>
+                        <pidFolder>${pid_dir}/</pidFolder>
                         <logFilename>${server_name}_inf.log</logFilename>
                     </embeddedLaunchScriptProperties>
                     <executable>true</executable>
