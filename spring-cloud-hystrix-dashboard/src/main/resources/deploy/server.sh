@@ -23,6 +23,14 @@ if [ ! -d ${LOGS_DIR} ]; then
     mkdir -p ${LOGS_DIR}
 fi
 
+PID_DIR=${pid_dir}
+if [ -z "$PID_DIR:" ]; then
+    PID_DIR=/app/data/run/
+fi
+if [ ! -d ${PID_DIR} ]; then
+    mkdir -p ${PID_DIR}
+fi
+
 if [ $ENV = "product" ]; then
     # 线上环境增加全异步日志
     JAVA_OPTS=$JAVA_OPTS" -DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector -DAsyncLogger.WaitStrategy=busyspin"
