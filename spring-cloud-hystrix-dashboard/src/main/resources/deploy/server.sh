@@ -16,7 +16,7 @@ if [ -z "$SERVER_NAME" ]; then
 fi
 
 LOGS_DIR=${log_dir}
-if [ -z "$LOGS_DIR:" ]; then
+if [ -z "$LOGS_DIR" ]; then
     LOGS_DIR=/app/logs/${server_name}/
 fi
 if [ ! -d ${LOGS_DIR} ]; then
@@ -24,7 +24,7 @@ if [ ! -d ${LOGS_DIR} ]; then
 fi
 
 PID_DIR=${pid_dir}
-if [ -z "$PID_DIR:" ]; then
+if [ -z "$PID_DIR" ]; then
     PID_DIR=/app/data/run/
 fi
 if [ ! -d ${PID_DIR} ]; then
