@@ -33,7 +33,8 @@ fi
 
 if [ $ENV = "product" ]; then
     # 线上环境增加全异步日志
-    JAVA_OPTS=$JAVA_OPTS" -DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector -DAsyncLogger.WaitStrategy=busyspin"
+    # JAVA_OPTS=$JAVA_OPTS" -DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector -DAsyncLogger.WaitStrategy=busyspin"
+    JAVA_OPTS=$JAVA_OPTS" -DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector"
 fi
 
 
