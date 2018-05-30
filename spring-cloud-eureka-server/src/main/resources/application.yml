@@ -20,6 +20,8 @@ spring:
   ### 项目基本信息
   application:
     name: "${server_name}"
+  profiles:
+    active: ${project.environment}
   ### http配置
   http:
     encoding:
@@ -43,9 +45,10 @@ spring:
     ansi:
       enabled: always
 management:
-  endpoints:
-    web:
-      base-path: /_monitor
+  info.git.mode: full
+  security:
+    enabled: false
+  context-path: /_monitor
 
 ---
 spring:

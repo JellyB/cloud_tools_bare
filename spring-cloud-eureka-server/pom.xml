@@ -75,7 +75,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<finalName>${server_name}</finalName>
-					<mainClass>com.huatu.spring.cloud.HystrixDashboardApp</mainClass>
+					<mainClass>com.huatu.spring.cloud.SpringCloudEurekaServerApplication</mainClass>
 					<layout>ZIP</layout>
 					<embeddedLaunchScriptProperties>
 						<!--默认的就可以-->
