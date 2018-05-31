@@ -15,7 +15,7 @@ eureka:
       service-url:
         defaultZone: http://peer2:${server.port}/eureka/
   server:
-      enable-self-preservation: false
+      enable-self-preservation: true
 spring:
   ### 项目基本信息
   application:
