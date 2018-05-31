@@ -1,4 +1,4 @@
 spring:
   profiles:
-    active: peer2
+    active: peer1
 debug: true
