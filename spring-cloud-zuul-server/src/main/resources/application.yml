@@ -1,9 +1,16 @@
 server:
-  port: 11002
+  port: 11005
   undertow:
       io-threads: 2
       worker-threads: 20
       buffer-size: 1024
+
+#zuul:
+#  routes:
+#    cloud-u:
+#      path: /u/**   #路由路径
+#      url: http://123.103.86.52:11010/   #指定URL地址
+#      serviceId:user-service    //推荐下面这个
 
 
 spring:
@@ -44,3 +51,15 @@ spring:
       enabled: always
 
 
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    service-url: http://123.103.86.52:11003/ #配置Eureka Server
+---
+spring:
+  profiles: test
+eureka:
+  client:
+    service-url: http://123.103.86.52:11003/ #配置Eureka Server

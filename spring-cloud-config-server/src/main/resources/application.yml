@@ -1,10 +1,9 @@
 server:
-  port: 11002
+  port: 11006
   undertow:
       io-threads: 2
       worker-threads: 20
       buffer-size: 1024
-
 
 spring:
   ### 项目基本信息
@@ -44,3 +43,15 @@ spring:
       enabled: always
 
 
+---
+spring:
+  profiles: dev
+  client:
+    service-url:
+      default-zone: http://123.103.86.52:11003/ #配置Eureka Server
+---
+spring:
+  profiles: test
+  client:
+    service-url:
+      default-zone: http://123.103.86.52:11003/ #配置Eureka Server

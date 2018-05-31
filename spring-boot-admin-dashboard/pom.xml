@@ -14,7 +14,7 @@
 
     <properties>
         <spring-boot-admin.version>1.5.2</spring-boot-admin.version>
-        <!-- filter -->
+        <!-- config -->
         <server_name>spring-boot-admin-dashboard</server_name>
         <log_dir>/app/logs/${server_name}</log_dir>
         <pid_dir>/app/data/run</pid_dir>

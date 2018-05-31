@@ -13,7 +13,7 @@
     <artifactId>spring-cloud-hystrix-dashboard</artifactId>
 
     <properties>
-        <!-- filter -->
+        <!-- config -->
         <server_name>spring-cloud-hystrix-dashboard</server_name>
         <log_dir>/app/logs/${server_name}</log_dir>
         <pid_dir>/app/data/run</pid_dir>
