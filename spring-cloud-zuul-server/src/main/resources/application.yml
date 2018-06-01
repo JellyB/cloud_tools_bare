@@ -22,10 +22,6 @@ spring:
     output:
       ansi:
         enabled: always
-    http:
-      encoding:
-        charset: UTF-8
-        force: true
   ### http配置
   http:
     encoding:
@@ -56,10 +52,12 @@ spring:
   profiles: dev
 eureka:
   client:
-    service-url: http://123.103.86.52:11003/ #配置Eureka Server
+    service-url:
+      defaultZone: http://123.103.86.52:11003/ #配置Eureka Server
 ---
 spring:
   profiles: test
 eureka:
   client:
-    service-url: http://123.103.86.52:11003/ #配置Eureka Server
+    service-url:
+      defaultZone: http://123.103.86.52:11003/ #配置Eureka Server

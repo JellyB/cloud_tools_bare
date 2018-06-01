@@ -14,10 +14,6 @@ spring:
     output:
       ansi:
         enabled: always
-    http:
-      encoding:
-        charset: UTF-8
-        force: true
   ### http配置
   http:
     encoding:
