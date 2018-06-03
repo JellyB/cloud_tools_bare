@@ -1,4 +1,5 @@
 package com.huatu.spring.cloud.config;
+import com.huatu.common.ErrorResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.netflix.zuul.filters.route.ZuulFallbackProvider;
 import org.springframework.http.HttpHeaders;
@@ -58,7 +59,7 @@ public class GatewayZuulFallback implements ZuulFallbackProvider {
             @Override
             public InputStream getBody() throws IOException {
                 log.error("-----------getBody------------");
-                return new ByteArrayInputStream(getStatusText().getBytes());
+                return new ByteArrayInputStream("服务器繁忙，请稍后重试。".getBytes());
             }
 
             @Override

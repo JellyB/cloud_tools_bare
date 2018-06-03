@@ -26,6 +26,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.huatu.commons</groupId>
+            <artifactId>common-base</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zuul</artifactId>
         </dependency>

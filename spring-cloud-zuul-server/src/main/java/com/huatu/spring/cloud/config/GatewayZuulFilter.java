@@ -53,10 +53,16 @@ public class GatewayZuulFilter  extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
         String token = request.getParameter("token");
         if(token == null) {
+            //TODO  权限校验
             log.info("----------success------------");
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(404);
             ctx.setResponseBody("token cannot be empty");
+        }else {
+            //TODO collect  user info
+            log.info("------记录 客户端来源同步到hbase------");
+           String cv =  request.getHeader("cv");
+           String terminal =  request.getHeader("terminal");
         }
         return null;
     }
