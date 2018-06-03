@@ -37,7 +37,7 @@ spring:
   application:
     name: "${server_name}"
     profiles:
-      active: test
+      active: "${project.environment}"
   ### http配置
   http:
     encoding:
@@ -71,24 +71,3 @@ management:
   security:
     enabled: false
   context-path: /_monitor
-
-
----
-spring:
-  profiles: dev
-debug: true
-
----
-spring:
-  profiles: test
-
-server:
-  error:
-    include-stacktrace: always
----
-spring:
-  profiles: release
-
----
-spring:
-  profiles: product
