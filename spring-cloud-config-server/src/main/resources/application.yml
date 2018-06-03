@@ -44,10 +44,10 @@ spring:
   profiles: dev
   client:
     service-url:
-      default-zone: http://123.103.86.52:11003/ #配置Eureka Server
+      default-zone: http://123.103.86.52:11003/eureka #配置Eureka Server
 ---
 spring:
   profiles: test
   client:
     service-url:
-      default-zone: http://123.103.86.52:11003/ #配置Eureka Server
+      default-zone: http://123.103.86.52:11003/eureka #配置Eureka Server

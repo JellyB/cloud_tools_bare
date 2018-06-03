@@ -4,24 +4,40 @@ server:
       io-threads: 2
       worker-threads: 20
       buffer-size: 1024
+eureka:
+  client:
+    service-url:
+      defaultZone: http://123.103.86.52:11003/eureka #配置Eureka Server
 
-#zuul:
-#  routes:
-#    cloud-u:
-#      path: /u/**   #路由路径
-#      url: http://123.103.86.52:11010/   #指定URL地址
-#      serviceId:user-service    //推荐下面这个
-
-
+#配置示例
+zuul:
+  routes:
+    api-search-server:
+      path: /s/**
+      serviceId: search-server
+    api-user-server:
+      path: /u/**
+      serviceId: user-server
+  retryable: true  #路由重试
+ribbon:
+#  ribbon重试超时时间
+  ConnectTimeout: 250
+#  建立连接后的超时时间
+  ReadTimeout: 1000
+#  对所有操作请求都进行重试
+  OkToRetryOnAllOperations: true
+#  切换实例的重试次数
+  MaxAutoRetriesNextServer: 1
+#  对当前实例的重试次数
+  MaxAutoRetries: 1
+  eureka:
+      enable: true
 spring:
   ### 项目基本信息
   application:
     name: "${server_name}"
     profiles:
-      active: ${project.environment}
-    output:
-      ansi:
-        enabled: always
+      active: "${project.environment}"
   ### http配置
   http:
     encoding:
@@ -45,19 +61,13 @@ spring:
   output:
     ansi:
       enabled: always
-
-
----
-spring:
-  profiles: dev
-eureka:
-  client:
-    service-url:
-      defaultZone: http://123.103.86.52:11003/ #配置Eureka Server
----
-spring:
-  profiles: test
-eureka:
-  client:
-    service-url:
-      defaultZone: http://123.103.86.52:11003/ #配置Eureka Server
+  #hystrix dashboard的信息收集频率
+  cloud:
+    hypermedia:
+      refresh:
+        fixed-delay: 5000
+management:
+  info.git.mode: full
+  security:
+    enabled: false
+  context-path: /_monitor
