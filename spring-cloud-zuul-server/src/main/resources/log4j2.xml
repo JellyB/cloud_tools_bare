@@ -16,7 +16,7 @@
         <Root level="INFO">
             <AppenderRef ref="Console"/>
         </Root>
-        <Logger name="com.huatu.tiku.course.netschool.api" level="DEBUG" additivity="false" includeLocation="true">
+        <Logger name="com.huatu.tiku.spring.cloud" level="DEBUG" additivity="false" includeLocation="true">
             <AppenderRef ref="Console"/>
         </Logger>
     </Loggers>
