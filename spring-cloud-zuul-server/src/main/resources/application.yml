@@ -7,7 +7,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://123.103.86.52:11003/eureka #配置Eureka Server
+      defaultZone: http://localhost:11003/eureka #配置Eureka Server
 
 #配置示例
 zuul:
