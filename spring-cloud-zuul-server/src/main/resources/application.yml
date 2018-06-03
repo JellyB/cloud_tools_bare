@@ -37,7 +37,7 @@ spring:
   application:
     name: "${server_name}"
     profiles:
-      active: "${project.environment}"
+      active: test
   ### http配置
   http:
     encoding:
