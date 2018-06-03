@@ -71,3 +71,24 @@ management:
   security:
     enabled: false
   context-path: /_monitor
+
+
+---
+spring:
+  profiles: dev
+debug: true
+
+---
+spring:
+  profiles: test
+
+server:
+  error:
+    include-stacktrace: always
+---
+spring:
+  profiles: release
+
+---
+spring:
+  profiles: product

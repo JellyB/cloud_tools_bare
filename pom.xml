@@ -8,7 +8,7 @@
         <module>spring-boot-admin-dashboard</module>
         <module>spring-cloud-eureka-server</module>
         <module>spring-cloud-zuul-server</module>
-        <module>spring-cloud-config-server</module>
+        <!--<module>spring-cloud-config-server</module>-->
     </modules>
     <parent>
         <groupId>com.huatu</groupId>
