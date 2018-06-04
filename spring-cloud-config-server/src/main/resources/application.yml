@@ -37,7 +37,19 @@ spring:
   output:
     ansi:
       enabled: always
-
+      
+  ### configure files    
+  cloud:
+      config:
+        server:
+          git:
+            uri: https://github.com/MengyeGao/config-server
+        label: master
+management:
+  info.git.mode: full
+  security:
+    enabled: false
+  context-path: /_monitor
 
 ---
 spring:
