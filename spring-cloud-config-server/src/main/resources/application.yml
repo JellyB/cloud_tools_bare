@@ -43,7 +43,7 @@ spring:
       config:
         server:
           git:
-            uri: https://github.com/MengyeGao/config-server
+            uri: http://123.103.86.53:8090/interview-cool/config-files.git
         label: master
 management:
   info.git.mode: full
