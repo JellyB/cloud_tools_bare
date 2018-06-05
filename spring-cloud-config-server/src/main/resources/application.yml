@@ -1,19 +1,24 @@
 server:
-  port: 11006
+  port: 8888
   undertow:
       io-threads: 2
       worker-threads: 20
       buffer-size: 1024
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:11003/eureka/ #配置Eureka Server
 
 spring:
   ### 项目基本信息
   application:
     name: "${server_name}"
-    profiles:
-      active: ${project.environment}
     output:
-      ansi:
-        enabled: always
+        ansi:
+          enabled: always
+  profiles:
+    active: development
+
   ### http配置
   http:
     encoding:
@@ -37,29 +42,31 @@ spring:
   output:
     ansi:
       enabled: always
-      
-  ### configure files    
+  ### configure files
   cloud:
       config:
         server:
           git:
-            uri: http://123.103.86.53:8090/interview-cool/config-files.git
+            uri: https://github.com/MengyeGao/config-server
         label: master
+
 management:
   info.git.mode: full
   security:
     enabled: false
   context-path: /_monitor
 
+
 ---
 spring:
-  profiles: dev
-  client:
-    service-url:
-      default-zone: http://123.103.86.52:11003/eureka #配置Eureka Server
+  profiles: development
+ # client:
+ #   service-url:
+ #    default-zone: http://192.168.31.112:11003/eureka
+
 ---
 spring:
   profiles: test
   client:
     service-url:
-      default-zone: http://123.103.86.52:11003/eureka #配置Eureka Server
+      default-zone: http://localhost:11003/eureka #配置Eureka Server
