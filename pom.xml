@@ -9,6 +9,7 @@
         <module>spring-cloud-eureka-server</module>
         <module>spring-cloud-zuul-server</module>
         <module>spring-cloud-config-server</module>
+        <module>spring-config-client</module>
     </modules>
     <parent>
         <groupId>com.huatu</groupId>
