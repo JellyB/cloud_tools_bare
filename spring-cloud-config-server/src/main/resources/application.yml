@@ -7,7 +7,7 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:11003/eureka/ #配置Eureka Server
+      defaultZone: http://192.168.31.112:11003/eureka/ #配置Eureka Server
 
 spring:
   ### 项目基本信息
@@ -67,6 +67,7 @@ spring:
 ---
 spring:
   profiles: test
+eureka:
   client:
-    service-url:
-      default-zone: http://localhost:11003/eureka #配置Eureka Server
+    serviceUrl:
+      defaultZone: http://192.168.31.112:11003/eureka #配置Eureka Server
