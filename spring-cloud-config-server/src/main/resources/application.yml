@@ -38,13 +38,6 @@ spring:
   output:
     ansi:
       enabled: always
-  ### configure files
-  cloud:
-      config:
-        server:
-          git:
-            uri: git@123.103.86.53:interview-cool/config-files.git
-        label: master
 
 management:
   info.git.mode: full
@@ -56,6 +49,12 @@ management:
 spring:
   profiles: dev
 
+  cloud:
+      config:
+        server:
+          git:
+            uri: https://github.com/MengyeGao/config-server
+
 eureka:
   client:
     serviceUrl:
@@ -64,6 +63,12 @@ eureka:
 ---
 spring:
   profiles: test
+
+  cloud:
+      config:
+        server:
+          git:
+            uri: git@192.168.100.21:interview-cool/config-files.git
 
 eureka:
   client:
