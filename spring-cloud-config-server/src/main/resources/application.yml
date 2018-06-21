@@ -4,10 +4,6 @@ server:
       io-threads: 2
       worker-threads: 20
       buffer-size: 1024
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://192.168.31.112:11003/eureka/ #配置Eureka Server
 
 spring:
   ### 项目基本信息
@@ -17,7 +13,7 @@ spring:
         ansi:
           enabled: always
   profiles:
-    active: development
+    active: ${project.environment}
 
   ### http配置
   http:
@@ -47,7 +43,7 @@ spring:
       config:
         server:
           git:
-            uri: https://github.com/MengyeGao/config-server
+            uri: git@123.103.86.53:interview-cool/config-files.git
         label: master
 
 management:
@@ -56,18 +52,20 @@ management:
     enabled: false
   context-path: /_monitor
 
-
 ---
 spring:
-  profiles: development
- # client:
- #   service-url:
- #    default-zone: http://192.168.31.112:11003/eureka
+  profiles: dev
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://123.103.86.52:11003/eureka/
 
 ---
 spring:
   profiles: test
+
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.31.112:11003/eureka #配置Eureka Server
+      defaultZone: http://192.168.100.22:11003/eureka/
