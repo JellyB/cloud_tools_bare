@@ -55,9 +55,9 @@ public class GatewayZuulFilter  extends ZuulFilter {
         if(token == null) {
             //TODO  权限校验
             log.info("----------success------------");
-            ctx.setSendZuulResponse(false);
-            ctx.setResponseStatusCode(404);
-            ctx.setResponseBody("token cannot be empty");
+//            ctx.setSendZuulResponse(false);
+//            ctx.setResponseStatusCode(404);
+//            ctx.setResponseBody("token cannot be empty");
             return null;
         }else {
             //TODO collect  user info
