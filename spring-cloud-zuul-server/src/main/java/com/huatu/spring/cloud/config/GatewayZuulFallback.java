@@ -1,6 +1,8 @@
 package com.huatu.spring.cloud.config;
+import com.alibaba.fastjson.JSONObject;
 import com.huatu.common.ErrorResult;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.json.JsonParser;
 import org.springframework.cloud.netflix.zuul.filters.route.ZuulFallbackProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -43,13 +45,13 @@ public class GatewayZuulFallback implements ZuulFallbackProvider {
             @Override
             public int getRawStatusCode() throws IOException {
                 log.error("-----------getRawStatusCode------------");
-                return this.getStatusCode().value();// 500
+                return this.getStatusCode().value();
             }
 
             @Override
             public String getStatusText() throws IOException {
                 log.error("-----------getStatusText------------");
-                return this.getStatusCode().getReasonPhrase();//  Internal Server Error
+                return this.getStatusCode().getReasonPhrase();
             }
 
             @Override
@@ -58,8 +60,11 @@ public class GatewayZuulFallback implements ZuulFallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                log.error("-----------getBody------------");
-                return new ByteArrayInputStream("服务器繁忙，请稍后重试。".getBytes());
+                log.error("-----------come from zuul fallback------------");
+                JSONObject r = new JSONObject();
+                r.put("code", "-1000");
+                r.put("message", "系统繁忙，请稍后重试...");
+                return new ByteArrayInputStream(r.toJSONString().getBytes("UTF-8"));
             }
 
             @Override

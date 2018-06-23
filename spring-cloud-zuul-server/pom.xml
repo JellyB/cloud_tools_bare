@@ -26,6 +26,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.huatu.commons</groupId>
             <artifactId>common-base</artifactId>
         </dependency>
