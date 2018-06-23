@@ -16,10 +16,10 @@ zuul:
       path: /s/**
       serviceId: search-server
     api-user-server:
-      path: /u/**
+      path: /user/**
       serviceId: user-server
     api-tiku-server:
-      path: /t/**
+      path: /tk/**
       serviceId: ic-tiku-server
   retryable: true  #路由重试
 ribbon:
