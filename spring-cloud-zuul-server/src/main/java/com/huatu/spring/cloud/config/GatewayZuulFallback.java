@@ -1,5 +1,6 @@
 package com.huatu.spring.cloud.config;
 import com.alibaba.fastjson.JSONObject;
+import com.huatu.common.CommonResult;
 import com.huatu.common.ErrorResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.json.JsonParser;
@@ -62,7 +63,7 @@ public class GatewayZuulFallback implements ZuulFallbackProvider {
             public InputStream getBody() throws IOException {
                 log.error("-----------come from zuul fallback------------");
                 JSONObject r = new JSONObject();
-                r.put("code", "-1000");
+                r.put("code", CommonResult.SERVICE_INTERNAL_ERROR.getCode());
                 r.put("message", "系统繁忙，请稍后重试...");
                 return new ByteArrayInputStream(r.toJSONString().getBytes("UTF-8"));
             }
