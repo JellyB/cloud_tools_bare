@@ -96,7 +96,13 @@ public class GatewayZuulFilter extends ZuulFilter {
                 InputStream in = request.getInputStream();
             String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
             JSONObject json = JSONObject.parseObject(body);
-            json.put("loginUserId", id);
+            if(json!=null){
+                json.put("loginUserId", id);
+            }else{
+                json = new JSONObject();
+                json.put("loginUserId", id);
+            }
+
             String newBody = json.toString();
 
             ctx.setRequest(new HttpServletRequestWrapper(RequestContext.getCurrentContext().getRequest()) {
