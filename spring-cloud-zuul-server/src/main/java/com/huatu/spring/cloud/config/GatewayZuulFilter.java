@@ -26,9 +26,10 @@ import java.util.Optional;
  **/
 @Slf4j
 @Component
-public class GatewayZuulFilter  extends ZuulFilter {
+public class GatewayZuulFilter extends ZuulFilter {
     @Autowired
     private RedisTemplate redisTemplate;
+
     /**
      * per：路由之前
      * routing：路由时
@@ -64,19 +65,19 @@ public class GatewayZuulFilter  extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         String token = request.getHeader("token");
-        if(token == null) {
-                //TODO  权限校验
-                log.info("-------GatewayZuulFilter---token不能为空------------");
-                ctx.setSendZuulResponse(false);
-                ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
-                JSONObject r = new JSONObject();
-                r.put("code", CommonResult.PERMISSION_DENIED.getCode());
-                r.put("message", CommonResult.PERMISSION_DENIED.getMessage());
-                ctx.setResponseBody(r.toJSONString());
+        if (token == null) {
+            //TODO  权限校验
+            log.info("-------GatewayZuulFilter---token不能为空------------");
+            ctx.setSendZuulResponse(false);
+            ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
+            JSONObject r = new JSONObject();
+            r.put("code", CommonResult.PERMISSION_DENIED.getCode());
+            r.put("message", CommonResult.PERMISSION_DENIED.getMessage());
+            ctx.setResponseBody(r.toJSONString());
             return null;
-        }else {
-            Long id = Long.parseLong(Optional.ofNullable(redisTemplate.opsForHash().get(token,"id")).orElse("0").toString());
-            if (id==0) {
+        } else {
+            Long id = Long.parseLong(Optional.ofNullable(redisTemplate.opsForHash().get(token, "id")).orElse("0").toString());
+            if (id == 0) {
                 ctx.setSendZuulResponse(false);
                 ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
                 JSONObject r = new JSONObject();
@@ -85,12 +86,10 @@ public class GatewayZuulFilter  extends ZuulFilter {
                 ctx.setResponseBody(r.toJSONString());
                 return null;
             }
-
-                        //TODO collect  user info
-            log.info("---todo---记录 客户端来源同步到hbase------");
-           String cv =  request.getHeader("cv");
-          String terminal =  request.getHeader("terminal");
-            String loginUserId = id+"";
+            String cv = request.getHeader("cv");
+            String terminal = request.getHeader("terminal");
+            log.info("{}$$${}$$${}", request.getRequestURI(), cv, terminal);
+            String loginUserId = id + "";
 
             ctx.setRequest(new HttpServletRequestWrapper(RequestContext.getCurrentContext().getRequest()) {
                 @Override
