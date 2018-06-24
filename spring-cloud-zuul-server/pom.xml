@@ -26,12 +26,17 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.huatu.commons</groupId>
-            <artifactId>common-base</artifactId>
+            <groupId>com.huatu.commons.sdk</groupId>
+            <artifactId>common-spring</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

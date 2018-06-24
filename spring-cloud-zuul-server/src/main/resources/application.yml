@@ -4,17 +4,13 @@ server:
       io-threads: 2
       worker-threads: 20
       buffer-size: 1024
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:11003/eureka #配置Eureka Server
 
 #配置示例
 zuul:
   routes:
     api-search-server:
       path: /s/**
-      serviceId: search-server
+      serviceId: search-service-local
     api-user-server:
       path: /user/**
       serviceId: user-server
@@ -39,14 +35,16 @@ spring:
   ### 项目基本信息
   application:
     name: "${server_name}"
-    profiles:
-      active: "${project.environment}"
+  profiles:
+    active: "${project.environment}"
   ### http配置
   http:
     encoding:
       charset: UTF-8
       force: true
-
+  redis:
+    cluster:
+      nodes: 192.168.100.19:6379,192.168.100.19:6380,192.168.100.19:6381
   ### jackson配置
   jackson:
     serialization:
@@ -74,3 +72,23 @@ management:
   security:
     enabled: false
   context-path: /_monitor
+
+---
+spring:
+  profiles: dev
+  application:
+     name: tiku-service-local
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://123.103.86.52:11003/eureka/
+
+---
+spring:
+  profiles: test
+  application:
+      name: ${server_name}
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.100.22:11003/eureka/

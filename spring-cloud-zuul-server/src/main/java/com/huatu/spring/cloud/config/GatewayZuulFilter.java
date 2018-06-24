@@ -1,12 +1,22 @@
 package com.huatu.spring.cloud.config;
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.huatu.common.CommonResult;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import com.netflix.zuul.http.HttpServletRequestWrapper;
+import com.netflix.zuul.http.ServletInputStreamWrapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Optional;
 
 
 /**
@@ -17,6 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Component
 public class GatewayZuulFilter  extends ZuulFilter {
+    @Autowired
+    private RedisTemplate redisTemplate;
     /**
      * per：路由之前
      * routing：路由时
@@ -54,16 +66,43 @@ public class GatewayZuulFilter  extends ZuulFilter {
         String token = request.getHeader("token");
         if(token == null) {
             //TODO  权限校验
-            log.info("----------success------------");
-//            ctx.setSendZuulResponse(false);
-//            ctx.setResponseStatusCode(404);
-//            ctx.setResponseBody("token cannot be empty");
+            log.info("-------GatewayZuulFilter---token不能为空------------");
+            ctx.setSendZuulResponse(false);
+            ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
+            ctx.setResponseBody(CommonResult.FORBIDDEN.getMessage());
             return null;
         }else {
-            //TODO collect  user info
+            Long id = Long.parseLong(Optional.ofNullable(redisTemplate.opsForHash().get(token,"id")).orElse("0").toString());
+            if (id==0) {
+                ctx.setSendZuulResponse(false);
+                ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
+                ctx.setResponseBody(CommonResult.FORBIDDEN.getMessage());
+                return null;
+            }
+
+                        //TODO collect  user info
             log.info("---todo---记录 客户端来源同步到hbase------");
-          // String cv =  request.getHeader("cv");
-        //   String terminal =  request.getHeader("terminal");
+           String cv =  request.getHeader("cv");
+          String terminal =  request.getHeader("terminal");
+            String loginUserId = id+"";
+
+            ctx.setRequest(new HttpServletRequestWrapper(RequestContext.getCurrentContext().getRequest()) {
+                @Override
+                public ServletInputStream getInputStream() throws IOException {
+                    return new ServletInputStreamWrapper(loginUserId.getBytes());
+                }
+
+                @Override
+                public int getContentLength() {
+                    return loginUserId.getBytes().length;
+                }
+
+                @Override
+                public long getContentLengthLong() {
+                    return loginUserId.getBytes().length;
+                }
+            });
+
         }
         return null;
     }
