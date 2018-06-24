@@ -16,7 +16,7 @@ zuul:
       serviceId: ic-user-server
     api-tiku-server:
       path: /tk/**
-      serviceId: ic-tiku-server
+      serviceId: ic-tiku-server-zw
   retryable: true  #路由重试
 ribbon:
 #  ribbon重试超时时间
@@ -75,9 +75,13 @@ management:
 
 ---
 spring:
+  sleuth:
+    base-ur: http://127.0.0.1:10824
+    sampler:
+      percentage: 1.0
   profiles: dev
   application:
-     name: spring-cloud-zuul-server-local
+     name: spring-cloud-zuul-server-local-zw
 eureka:
   client:
     serviceUrl:
