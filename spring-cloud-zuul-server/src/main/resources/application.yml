@@ -13,7 +13,7 @@ zuul:
       serviceId: search-service
     api-user-server:
       path: /user/**
-      serviceId: user-server
+      serviceId: ic-user-server
     api-tiku-server:
       path: /tk/**
       serviceId: ic-tiku-server
