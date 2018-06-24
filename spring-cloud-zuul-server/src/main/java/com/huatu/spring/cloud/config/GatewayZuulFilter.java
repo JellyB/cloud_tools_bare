@@ -12,10 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StreamUtils;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.Optional;
 
 
@@ -89,24 +92,32 @@ public class GatewayZuulFilter extends ZuulFilter {
             String cv = request.getHeader("cv");
             String terminal = request.getHeader("terminal");
             log.info("{}$$${}$$${}", request.getRequestURI(), cv, terminal);
-            String loginUserId = id + "";
+            try {
+                InputStream in = request.getInputStream();
+            String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
+            JSONObject json = JSONObject.parseObject(body);
+            json.put("loginUserId", id);
+            String newBody = json.toString();
 
             ctx.setRequest(new HttpServletRequestWrapper(RequestContext.getCurrentContext().getRequest()) {
                 @Override
                 public ServletInputStream getInputStream() throws IOException {
-                    return new ServletInputStreamWrapper(loginUserId.getBytes());
+                    return new ServletInputStreamWrapper(newBody.getBytes());
                 }
 
                 @Override
                 public int getContentLength() {
-                    return loginUserId.getBytes().length;
+                    return newBody.getBytes().length;
                 }
 
                 @Override
                 public long getContentLengthLong() {
-                    return loginUserId.getBytes().length;
+                    return newBody.getBytes().length;
                 }
             });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }
         return null;
