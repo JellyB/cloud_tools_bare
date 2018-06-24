@@ -69,14 +69,20 @@ public class GatewayZuulFilter  extends ZuulFilter {
             log.info("-------GatewayZuulFilter---token不能为空------------");
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
-            ctx.setResponseBody(CommonResult.FORBIDDEN.getMessage());
+            JSONObject r = new JSONObject();
+            r.put("code", CommonResult.PERMISSION_DENIED.getCode());
+            r.put("message", CommonResult.PERMISSION_DENIED.getMessage());
+            ctx.setResponseBody(r.toJSONString());
             return null;
         }else {
             Long id = Long.parseLong(Optional.ofNullable(redisTemplate.opsForHash().get(token,"id")).orElse("0").toString());
             if (id==0) {
                 ctx.setSendZuulResponse(false);
                 ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
-                ctx.setResponseBody(CommonResult.FORBIDDEN.getMessage());
+                JSONObject r = new JSONObject();
+                r.put("code", CommonResult.PERMISSION_DENIED.getCode());
+                r.put("message", CommonResult.PERMISSION_DENIED.getMessage());
+                ctx.setResponseBody(r.toJSONString());
                 return null;
             }
 
