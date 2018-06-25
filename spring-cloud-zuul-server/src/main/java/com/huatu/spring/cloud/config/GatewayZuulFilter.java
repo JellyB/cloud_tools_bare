@@ -1,25 +1,32 @@
 package com.huatu.spring.cloud.config;
 
 
-import com.alibaba.fastjson.JSONObject;
-import com.huatu.common.CommonResult;
-import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.http.HttpServletRequestWrapper;
-import com.netflix.zuul.http.ServletInputStreamWrapper;
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.util.Optional;
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
+import com.huatu.common.CommonResult;
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+import com.netflix.zuul.http.HttpServletRequestWrapper;
+import com.netflix.zuul.http.ServletInputStreamWrapper;
+
+import lombok.extern.slf4j.Slf4j;
 
 
 /**
@@ -121,6 +128,14 @@ public class GatewayZuulFilter extends ZuulFilter {
                     return newBody.getBytes().length;
                 }
             });
+
+            // 添加用户ID参数
+            Map<String, List<String>> requestParams = ctx.getRequestQueryParams();
+            if (requestParams == null) {
+            	requestParams = Maps.newHashMap();
+            	ctx.setRequestQueryParams(requestParams);
+            }
+            requestParams.put("loginUserId", Arrays.asList(id + ""));
             } catch (IOException e) {
                 e.printStackTrace();
             }
