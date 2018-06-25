@@ -16,7 +16,7 @@ zuul:
       serviceId: ic-user-server
     api-tiku-server:
       path: /tk/**
-      serviceId: ic-tiku-server-zw
+      serviceId: ic-tiku-server
   retryable: true  #路由重试
 ribbon:
 #  ribbon重试超时时间
