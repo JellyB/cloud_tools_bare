@@ -99,36 +99,39 @@ public class GatewayZuulFilter extends ZuulFilter {
             String cv = request.getHeader("cv");
             String terminal = request.getHeader("terminal");
             log.info("{}$$${}$$${}", request.getRequestURI(), cv, terminal);
-            try {
-                InputStream in = request.getInputStream();
-            String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
-            JSONObject json = JSONObject.parseObject(body);
-            if(json!=null){
-                json.put("loginUserId", id);
-            }else{
-                json = new JSONObject();
-                json.put("loginUserId", id);
-            }
-
-            String newBody = json.toString();
-
-            ctx.setRequest(new HttpServletRequestWrapper(RequestContext.getCurrentContext().getRequest()) {
-                @Override
-                public ServletInputStream getInputStream() throws IOException {
-                    return new ServletInputStreamWrapper(newBody.getBytes());
-                }
-
-                @Override
-                public int getContentLength() {
-                    return newBody.getBytes().length;
-                }
-
-                @Override
-                public long getContentLengthLong() {
-                    return newBody.getBytes().length;
-                }
-            });
-
+//            try {
+//                InputStream in = request.getInputStream();
+//            String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
+//            JSONObject json = JSONObject.parseObject(body);
+//            if(json!=null){
+//                json.put("loginUserId", id);
+//            }else{
+//                json = new JSONObject();
+//                json.put("loginUserId", id);
+//            }
+//
+//            String newBody = json.toString();
+//
+//            ctx.setRequest(new HttpServletRequestWrapper(RequestContext.getCurrentContext().getRequest()) {
+//                @Override
+//                public ServletInputStream getInputStream() throws IOException {
+//                    return new ServletInputStreamWrapper(newBody.getBytes());
+//                }
+//
+//                @Override
+//                public int getContentLength() {
+//                    return newBody.getBytes().length;
+//                }
+//
+//                @Override
+//                public long getContentLengthLong() {
+//                    return newBody.getBytes().length;
+//                }
+//            });
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
             // 添加用户ID参数
             Map<String, List<String>> requestParams = ctx.getRequestQueryParams();
             if (requestParams == null) {
@@ -136,9 +139,6 @@ public class GatewayZuulFilter extends ZuulFilter {
             	ctx.setRequestQueryParams(requestParams);
             }
             requestParams.put("loginUserId", Arrays.asList(id + ""));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
         }
         return null;
