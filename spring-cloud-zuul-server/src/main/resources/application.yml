@@ -10,7 +10,7 @@ zuul:
   routes:
     api-search-server:
       path: /s/**
-      serviceId: search-service
+      serviceId: ic-search-service
     api-user-server:
       path: /user/**
       serviceId: ic-user-server
