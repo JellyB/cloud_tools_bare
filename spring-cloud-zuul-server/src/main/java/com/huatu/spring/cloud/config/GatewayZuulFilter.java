@@ -74,6 +74,13 @@ public class GatewayZuulFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
+
+        String url = request.getRequestURI();
+        if(url.startsWith("/user/v1/user/phoneCode")
+                || url.startsWith("/user/v1/user/phoneLogin")
+                || url.startsWith("/user/v1/user/login")){
+            return null;
+        }
         String token = request.getHeader("token");
         if (token == null) {
             //TODO  权限校验
