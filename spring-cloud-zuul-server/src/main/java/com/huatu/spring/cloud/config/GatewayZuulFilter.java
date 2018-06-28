@@ -137,6 +137,7 @@ public class GatewayZuulFilter extends ZuulFilter {
             Map<String, List<String>> requestParams = ctx.getRequestQueryParams();
             if (requestParams == null) {
             	requestParams = Maps.newHashMap();
+            	ctx.setRequestQueryParams(requestParams);
             }
             requestParams.put("loginUserId", Arrays.asList(id + ""));
 
