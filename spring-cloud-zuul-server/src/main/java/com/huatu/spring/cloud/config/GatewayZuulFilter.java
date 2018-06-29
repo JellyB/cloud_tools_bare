@@ -76,6 +76,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
 
         String url = request.getRequestURI();
+
         if(url.startsWith("/user/v1/user/phoneCode")
                 || url.startsWith("/user/v1/user/phoneLogin")
                 || url.startsWith("/user/v1/user/login")){
@@ -93,7 +94,9 @@ public class GatewayZuulFilter extends ZuulFilter {
             ctx.setResponseBody(r.toJSONString());
             return null;
         } else {
+            log.info("-------GatewayZuulFilter---token不能为空------------token值:" + token);
             Long id = Long.parseLong(Optional.ofNullable(redisTemplate.opsForHash().get(token, "id")).orElse("0").toString());
+            log.info("-------GatewayZuulFilter---token不能为空------------id值:" + id);
             if (id == 0) {
                 ctx.setSendZuulResponse(false);
                 ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
