@@ -79,7 +79,8 @@ public class GatewayZuulFilter extends ZuulFilter {
 
         if(url.startsWith("/user/v1/user/phoneCode")
                 || url.startsWith("/user/v1/user/phoneLogin")
-                || url.startsWith("/user/v1/user/login")){
+                || url.startsWith("/user/v1/user/login")
+                || url.startsWith("/user/v1/user/thirdLogin")){
             return null;
         }
         String token = request.getHeader("token");
