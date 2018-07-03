@@ -19,7 +19,7 @@ zuul:
       serviceId: ic-tiku-server
     api-course-server:
       path: /c/**
-      url: http://192.168.19.22/c
+      url: http://192.168.100.22/c
   retryable: true  #路由重试
 ribbon:
 #  ribbon重试超时时间
