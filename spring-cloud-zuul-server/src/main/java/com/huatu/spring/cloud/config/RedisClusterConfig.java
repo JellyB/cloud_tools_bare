@@ -1,6 +1,7 @@
 package com.huatu.spring.cloud.config;
 
 import com.huatu.common.spring.serializer.StringRedisKeySerializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -16,16 +17,18 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class RedisClusterConfig {
 
+    @Value("${spring.application.name}")
+    private String applicationName;
+
     @Bean
-    public StringRedisKeySerializer stringRedisKeySerializer(){
-        return new StringRedisKeySerializer();
+    public StringRedisKeySerializer stringRedisKeySerializer() {
+        return new StringRedisKeySerializer("ic-user-server");
     }
 
     @Bean
     public StringRedisTemplate stringRedisTemplate(JedisConnectionFactory jedisConnectionFactory){
         return new StringRedisTemplate(jedisConnectionFactory);
     }
-
 
     /**
      * 使用官方的，防止踩坑
