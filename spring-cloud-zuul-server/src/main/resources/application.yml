@@ -84,11 +84,11 @@ spring:
       percentage: 1.0
   profiles: dev
   application:
-     name: spring-cloud-zuul-server-local-zw
+     name: spring-cloud-zuul-server-local-laobo
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:11003/eureka/
+      defaultZone: http://192.168.100.22:11003/eureka/
 
 ---
 spring:
