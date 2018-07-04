@@ -22,7 +22,7 @@ public class RedisClusterConfig {
 
     @Bean
     public StringRedisKeySerializer stringRedisKeySerializer() {
-        return new StringRedisKeySerializer("ic-user-server");
+        return new StringRedisKeySerializer("interview");
     }
 
     @Bean
@@ -43,8 +43,8 @@ public class RedisClusterConfig {
     public RedisTemplate redisTemplate(StringRedisKeySerializer stringRedisKeySerializer, GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer, JedisConnectionFactory jedisConnectionFactory){
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(jedisConnectionFactory);
-//        redisTemplate.setKeySerializer(stringRedisKeySerializer);
-//        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setKeySerializer(stringRedisKeySerializer);
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         redisTemplate.setDefaultSerializer(genericJackson2JsonRedisSerializer);
         return redisTemplate;
     }
