@@ -22,12 +22,7 @@ public class RedisClusterConfig {
 
     @Bean
     public StringRedisKeySerializer stringRedisKeySerializer() {
-        return new StringRedisKeySerializer("interview");
-    }
-
-    @Bean
-    public StringRedisTemplate stringRedisTemplate(JedisConnectionFactory jedisConnectionFactory){
-        return new StringRedisTemplate(jedisConnectionFactory);
+        return new StringRedisKeySerializer("ic");
     }
 
     /**
@@ -40,11 +35,18 @@ public class RedisClusterConfig {
     }
 
     @Bean
-    public RedisTemplate redisTemplate(StringRedisKeySerializer stringRedisKeySerializer, GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer, JedisConnectionFactory jedisConnectionFactory){
+    public StringRedisTemplate stringRedisTemplate(StringRedisKeySerializer stringRedisKeySerializer, JedisConnectionFactory jedisConnectionFactory) {
+        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
+        stringRedisTemplate.setConnectionFactory(jedisConnectionFactory);
+        stringRedisTemplate.setKeySerializer(stringRedisKeySerializer);
+        return stringRedisTemplate;
+    }
+
+    @Bean
+    public RedisTemplate redisTemplate(StringRedisKeySerializer stringRedisKeySerializer, GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer, JedisConnectionFactory jedisConnectionFactory) {
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(jedisConnectionFactory);
         redisTemplate.setKeySerializer(stringRedisKeySerializer);
-        redisTemplate.setHashKeySerializer(stringRedisKeySerializer);
         redisTemplate.setDefaultSerializer(genericJackson2JsonRedisSerializer);
         return redisTemplate;
     }
