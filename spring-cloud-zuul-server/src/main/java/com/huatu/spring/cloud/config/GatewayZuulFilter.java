@@ -4,14 +4,12 @@ package com.huatu.spring.cloud.config;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
@@ -37,6 +35,44 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class GatewayZuulFilter extends ZuulFilter {
+
+    private static List<String> whiteUrls;
+
+    static {
+        whiteUrls = Lists.newArrayList();
+        // 获取验证码 登陆
+        whiteUrls.add("/user/v1/user/phoneCode");
+        whiteUrls.add("/user/v1/user/phoneLogin");
+        whiteUrls.add("/user/v1/user/login");
+        whiteUrls.add("/user/v1/user/thirdLogin");
+        whiteUrls.add("/user/v1/user/info");
+        // 题库相关
+        whiteUrls.add("/tk/v1/question/record");
+        whiteUrls.add("/tk/v1/video/list");
+        whiteUrls.add("/tk/v1/video/answer");
+        whiteUrls.add("/tk/v1/question/detail/");
+        whiteUrls.add("/tk/v1/advert/");
+        whiteUrls.add("/tk/v1/question/newest/");
+        whiteUrls.add("/tk/v1/nationArea/");
+        whiteUrls.add("/tk/v1/question/nationArea/");
+        whiteUrls.add("/tk/v1/question/detail/");
+        whiteUrls.add("/tk/v1/question/type/");
+        whiteUrls.add("/tk/v1/nationArea/");
+        whiteUrls.add("/tk/v1/question/type/root");
+        whiteUrls.add("/tk/v1/question/type/");
+        whiteUrls.add("/tk/v1/question/type/noLeader");
+        whiteUrls.add("/tk/v1/exam/list");
+        whiteUrls.add("/tk/v1/position/");
+        whiteUrls.add("/tk/v1/dic/PositionInfoTag");
+        whiteUrls.add("/tk/v1/organization/");
+        whiteUrls.add("/tk/v1/organization/type/");
+        whiteUrls.add("/tk/v1/position/option/label/");
+        // 搜索相关
+        whiteUrls.add("/s/v1/user/search");
+        whiteUrls.add("/s/v1/question/search");
+        whiteUrls.add("/s/v1/hotWord/type");
+    }
+
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -77,12 +113,12 @@ public class GatewayZuulFilter extends ZuulFilter {
 
         String url = request.getRequestURI();
 
-        if(url.startsWith("/user/v1/user/phoneCode")
-                || url.startsWith("/user/v1/user/phoneLogin")
-                || url.startsWith("/user/v1/user/login")
-                || url.startsWith("/user/v1/user/thirdLogin")){
-            return null;
+        for(String whiteUrl : whiteUrls){
+            if(url.startsWith(whiteUrl)){
+                return null;
+            }
         }
+
         String token = request.getHeader("token");
         if (token == null) {
             //TODO  权限校验
