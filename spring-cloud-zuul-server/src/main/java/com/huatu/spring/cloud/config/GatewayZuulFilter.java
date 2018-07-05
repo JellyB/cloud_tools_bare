@@ -113,10 +113,16 @@ public class GatewayZuulFilter extends ZuulFilter {
 
         String url = request.getRequestURI();
         log.info("url:" + url);
-        for(String whiteUrl : whiteUrls){
-            if(url.startsWith(whiteUrl)){
-                return null;
-            }
+//        for(String whiteUrl : whiteUrls){
+//            if(url.startsWith(whiteUrl)){
+//                return null;
+//            }
+//        }
+
+        if(url.startsWith("/user/v1/user/phoneCode")
+                || url.startsWith("/user/v1/user/phoneLogin")
+                || url.startsWith("/user/v1/user/login")){
+            return null;
         }
 
         String token = request.getHeader("token");
