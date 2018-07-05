@@ -112,7 +112,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
 
         String url = request.getRequestURI();
-
+        log.info("url:" + url);
         for(String whiteUrl : whiteUrls){
             if(url.startsWith(whiteUrl)){
                 return null;
