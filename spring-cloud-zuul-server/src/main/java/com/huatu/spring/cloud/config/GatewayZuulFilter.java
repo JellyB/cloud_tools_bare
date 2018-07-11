@@ -47,8 +47,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/video/list");
         whiteUrls.add("/tk/v1/video/answer");
         whiteUrls.add("/tk/v1/question/detail/");
-        whiteUrls.add("/tk/v1/advert/");
-        whiteUrls.add("/tk/v1/question/newest/");
+        whiteUrls.add("/tk/v1/advert/[0-9]+");
+        whiteUrls.add("/tk/v1/question/newest");
         whiteUrls.add("/tk/v1/question/nationArea/");
         whiteUrls.add("/tk/v1/question/detail/");
         whiteUrls.add("/tk/v1/question/type/[0-9]+");
