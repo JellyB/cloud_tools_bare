@@ -37,6 +37,7 @@ import lombok.extern.slf4j.Slf4j;
 public class GatewayZuulFilter extends ZuulFilter {
 
     private static List<String> whiteUrls;
+    private static List<String> startWithWhiteUrls;
 
     static {
         whiteUrls = Lists.newArrayList();
@@ -45,7 +46,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/user/v1/user/phoneLogin");
         whiteUrls.add("/user/v1/user/login");
         whiteUrls.add("/user/v1/user/thirdLogin");
-        whiteUrls.add("/user/v1/user/info");
+        whiteUrls.add("/user/v1/user/info/");
         // 题库相关
         whiteUrls.add("/tk/v1/question/record");
         whiteUrls.add("/tk/v1/video/list");
@@ -53,24 +54,31 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/question/detail/");
         whiteUrls.add("/tk/v1/advert/");
         whiteUrls.add("/tk/v1/question/newest/");
-        whiteUrls.add("/tk/v1/nationArea/");
         whiteUrls.add("/tk/v1/question/nationArea/");
         whiteUrls.add("/tk/v1/question/detail/");
         whiteUrls.add("/tk/v1/question/type/");
-        whiteUrls.add("/tk/v1/nationArea/");
         whiteUrls.add("/tk/v1/question/type/root");
         whiteUrls.add("/tk/v1/question/type/");
         whiteUrls.add("/tk/v1/question/type/noLeader");
         whiteUrls.add("/tk/v1/exam/list");
+        whiteUrls.add("/tk/v1/position");
         whiteUrls.add("/tk/v1/position/");
         whiteUrls.add("/tk/v1/dic/PositionInfoTag");
-        whiteUrls.add("/tk/v1/organization/");
-        whiteUrls.add("/tk/v1/organization/type/");
+        whiteUrls.add("/tk/v1/organization//child");
         whiteUrls.add("/tk/v1/position/option/label/");
+        whiteUrls.add("/tk/v1/position//exercise");
+        whiteUrls.add("/tk/v1/position/course");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
         whiteUrls.add("/s/v1/hotWord/type");
+
+        startWithWhiteUrls = Lists.newArrayList();
+        startWithWhiteUrls.add("/v1/dic/");
+        startWithWhiteUrls.add("/tk/v1/nationArea/");
+        startWithWhiteUrls.add("/tk/v1/organization/type/");
+        startWithWhiteUrls.add("/tk/v1/position//tag/");
+        startWithWhiteUrls.add("/tk/v1/position/option/label/");
     }
 
     @Autowired
@@ -112,22 +120,11 @@ public class GatewayZuulFilter extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
 
         String url = request.getRequestURI();
-        log.info("url:" + url);
-//        for(String whiteUrl : whiteUrls){
-//            if(url.startsWith(whiteUrl)){
-//                return null;
-//            }
-//        }
-
-        if(url.startsWith("/user/v1/user/phoneCode")
-                || url.startsWith("/user/v1/user/phoneLogin")
-                || url.startsWith("/user/v1/user/login")){
-            return null;
-        }
-
         String token = request.getHeader("token");
         if (token == null) {
-            //TODO  权限校验
+            if(valueUrl(url)){
+                return null;
+            }
             log.info("-------GatewayZuulFilter---token不能为空------------");
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
@@ -152,40 +149,6 @@ public class GatewayZuulFilter extends ZuulFilter {
             String cv = request.getHeader("cv");
             String terminal = request.getHeader("terminal");
             log.info("{}$$${}$$${}", request.getRequestURI(), cv, terminal);
-//            try {
-//                InputStream in = request.getInputStream();
-//            String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
-//            JSONObject json = JSONObject.parseObject(body);
-//            if(json!=null){
-//                json.put("loginUserId", id);
-//            }else{
-//                json = new JSONObject();
-//                json.put("loginUserId", id);
-//            }
-//
-//            String newBody = json.toString();
-//
-//            ctx.setRequest(new HttpServletRequestWrapper(RequestContext.getCurrentContext().getRequest()) {
-//                @Override
-//                public ServletInputStream getInputStream() throws IOException {
-//                    return new ServletInputStreamWrapper(newBody.getBytes());
-//                }
-//
-//                @Override
-//                public int getContentLength() {
-//                    return newBody.getBytes().length;
-//                }
-//
-//                @Override
-//                public long getContentLengthLong() {
-//                    return newBody.getBytes().length;
-//                }
-//            });
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-            // 添加用户ID参数
             ctx.getRequest().getParameterMap();
             Map<String, List<String>> requestParams = ctx.getRequestQueryParams();
             if (requestParams == null) {
@@ -197,4 +160,24 @@ public class GatewayZuulFilter extends ZuulFilter {
         }
         return null;
     }
+
+    private boolean valueUrl(String url){
+        Integer index = url.indexOf("?");
+        if(index > 0){
+            url = url.substring(0, index);
+        }
+        url.replaceAll("\\d", "");
+        for(String startWithUrl: startWithWhiteUrls){
+            if(url.startsWith(startWithUrl)){
+                return true;
+            }
+        }
+        for(String whiteUrl : whiteUrls){
+            if(url.equals(whiteUrl)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
