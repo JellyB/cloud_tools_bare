@@ -112,8 +112,11 @@ public class GatewayZuulFilter extends ZuulFilter {
 
         String url = request.getRequestURI();
         String token = request.getHeader("token");
+
+        boolean whiteFlag = valueUrl(url);
         if (token == null) {
-            if(valueUrl(url)){
+        	// 未传token & 白名单
+            if(whiteFlag){
                 return null;
             }
             log.info("-------GatewayZuulFilter---token为空");
@@ -129,6 +132,10 @@ public class GatewayZuulFilter extends ZuulFilter {
             Long id = Long.parseLong(Optional.ofNullable(redisTemplate.opsForHash().get(token, "id")).orElse("0").toString());
             log.info("-------GatewayZuulFilter---用户id值:" + id);
             if (id == 0) {
+            	// 传入无效token & 白名单
+            	if(whiteFlag){
+                    return null;
+                }
                 ctx.setSendZuulResponse(false);
                 ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
                 JSONObject r = new JSONObject();
