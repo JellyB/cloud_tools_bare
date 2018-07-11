@@ -13,10 +13,10 @@ zuul:
       serviceId: ic-search-server
     api-user-server:
       path: /user/**
-      serviceId: ic-user-server-local-laobo
+      serviceId: ic-user-server
     api-tiku-server:
       path: /tk/**
-      serviceId: ic-tiku-server-local-laobo
+      serviceId: ic-tiku-server
     api-course-server:
       path: /c/**
       url: http://192.168.100.22/c
