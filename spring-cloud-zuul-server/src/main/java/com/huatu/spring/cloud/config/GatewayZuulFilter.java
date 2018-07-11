@@ -167,6 +167,10 @@ public class GatewayZuulFilter extends ZuulFilter {
 	 * @return true/false
 	 */
 	private boolean valueUrl(String url) {
+		if (url.endsWith("/")) {
+			url = url.substring(0, url.length() - 1);
+		}
+
 		for (String routeReg : whiteUrls) {
 			if (url.matches(routeReg)) {
 				return true;
