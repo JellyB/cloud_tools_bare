@@ -46,11 +46,10 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/question/record");
         whiteUrls.add("/tk/v1/video/list");
         whiteUrls.add("/tk/v1/video/answer");
-        whiteUrls.add("/tk/v1/question/detail/");
         whiteUrls.add("/tk/v1/advert/[0-9]+");
         whiteUrls.add("/tk/v1/question/newest");
-        whiteUrls.add("/tk/v1/question/nationArea/");
-        whiteUrls.add("/tk/v1/question/detail/");
+        whiteUrls.add("/tk/v1/question/nationArea/[0-9]+");
+        whiteUrls.add("/tk/v1/question/detail/[0-9]+");
         whiteUrls.add("/tk/v1/question/type/[0-9]+");
         whiteUrls.add("/tk/v1/question/type/root");
         whiteUrls.add("/tk/v1/question/type/noLeader");
@@ -65,7 +64,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/nationArea/[A-Z]+");
         whiteUrls.add("/tk/v1/organization/type/[A-Z]+");
         whiteUrls.add("/tk/v1/position/[0-9]+/tag/[A-Z]+");
-        whiteUrls.add("/tk/v1/position/option/label/");
+        whiteUrls.add("/tk/v1/position/option/label");
+        whiteUrls.add("/tk/v1/reference/[0-9]+/[A-Z]+");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
