@@ -61,15 +61,16 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/position/option/label/");
         whiteUrls.add("/tk/v1/position/[0-9]+/exercise");
         whiteUrls.add("/tk/v1/position/course");
-        whiteUrls.add("/tk/v1/nationArea/[A-Z]+");
-        whiteUrls.add("/tk/v1/organization/type/[A-Z]+");
-        whiteUrls.add("/tk/v1/position/[0-9]+/tag/[A-Z]+");
+        whiteUrls.add("/tk/v1/nationArea/[A-Z_]+");
+        whiteUrls.add("/tk/v1/organization/type/[A-Z_]+");
+        whiteUrls.add("/tk/v1/position/[0-9]+/tag/[A-Z_]+");
         whiteUrls.add("/tk/v1/position/option/label");
-        whiteUrls.add("/tk/v1/reference/[0-9]+/[A-Z]+");
+        whiteUrls.add("/tk/v1/reference/[0-9]+/[A-Z_]+");
+        whiteUrls.add("/tk/v1/question/type/[0-9]+/children");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
-        whiteUrls.add("/s/v1/hotWord/type/[A-Z]+");
+        whiteUrls.add("/s/v1/hotWord/type/[A-Z_]+");
     }
 
     @Autowired
