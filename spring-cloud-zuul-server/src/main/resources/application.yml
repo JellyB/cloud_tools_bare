@@ -45,6 +45,8 @@ spring:
     encoding:
       charset: UTF-8
       force: true
+    multipart:
+      max-file-size: 44MB
   redis:
     cluster:
       nodes: 192.168.100.19:6379,192.168.100.19:6380,192.168.100.19:6381
