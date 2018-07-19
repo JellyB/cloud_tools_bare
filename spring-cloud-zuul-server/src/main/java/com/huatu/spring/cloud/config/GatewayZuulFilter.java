@@ -69,7 +69,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/position/option/label");
         whiteUrls.add("/tk/v1/reference/[0-9]+/[A-Z_]+");
         whiteUrls.add("/tk/v1/question/type/[0-9]+/children");
-        whiteUrls.add("/tk/v1/hotWords");
+        whiteUrls.add("/tk/v1/hotWord/type/[0-9]+");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
