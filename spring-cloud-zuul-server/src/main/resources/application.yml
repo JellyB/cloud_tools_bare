@@ -52,7 +52,7 @@ spring:
       max-file-size: 44MB
   redis:
     cluster:
-      nodes: 192.168.100.19:6379,192.168.100.19:6380,192.168.100.19:6381
+      nodes: 192.168.100.20:6489,192.168.100.20:6589,192.168.100.20:6689
   ### jackson配置
   jackson:
     serialization:
