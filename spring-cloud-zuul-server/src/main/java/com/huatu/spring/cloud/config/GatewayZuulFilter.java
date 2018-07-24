@@ -56,7 +56,6 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/question/type/root");
         whiteUrls.add("/tk/v1/question/type/noLeader");
         whiteUrls.add("/tk/v1/exam/list");
-        whiteUrls.add("/tk/v1/position");
         whiteUrls.add("/tk/v1/position/[0-9]+");
         whiteUrls.add("/tk/v1/dic/[a-zA-Z]+");
         whiteUrls.add("/tk/v1/organization/[0-9]+/child");
