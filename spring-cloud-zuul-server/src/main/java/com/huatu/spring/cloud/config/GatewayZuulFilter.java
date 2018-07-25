@@ -44,6 +44,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/user/v1/user/info/[0-9]+");
         whiteUrls.add("/user/v1/user/register");
         whiteUrls.add("/user/v1/user/resetPassword");
+        whiteUrls.add("/user/v1/user/search");
         // 题库相关
         whiteUrls.add("/tk/v1/question/record");
         whiteUrls.add("/tk/v1/video/list");
@@ -70,6 +71,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/question/type/[0-9]+/children");
         whiteUrls.add("/tk/v1/hotWord/type/[0-9]+");
         whiteUrls.add("/tk/v1/image");
+        whiteUrls.add("/tk/v1/question/search");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
