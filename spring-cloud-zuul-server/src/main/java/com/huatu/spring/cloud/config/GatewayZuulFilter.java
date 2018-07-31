@@ -77,6 +77,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
         whiteUrls.add("/s/v1/hotWord/type/[A-Z_]+");
+        // 课程相关
+        whiteUrls.add("/c/v1/ic/courses/[0-9]+/getClassExt");
     }
 
     @Autowired
