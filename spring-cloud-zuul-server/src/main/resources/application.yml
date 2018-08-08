@@ -23,6 +23,9 @@ zuul:
     api-course-server-o:
       path: /co/**
       serviceId: ic-course-server
+    api-share-server-o:
+      path: /share/**
+      serviceId: ic-share-server
   retryable: true  #路由重试
 ribbon:
 #  ribbon重试超时时间
