@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -85,7 +86,7 @@ public class GatewayZuulFilter extends ZuulFilter {
     }
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * per：路由之前
@@ -141,7 +142,7 @@ public class GatewayZuulFilter extends ZuulFilter {
             return null;
         } else {
             log.info("-------GatewayZuulFilter---token值:" + token);
-            Long id = Long.parseLong(Optional.ofNullable(redisTemplate.opsForHash().get(token, "id")).orElse("0").toString());
+            Long id = Long.parseLong(Optional.ofNullable(stringRedisTemplate.opsForHash().get(token, "id")).orElse("0").toString());
             log.info("-------GatewayZuulFilter---用户id值:" + id);
             if (id == 0) {
             	// 传入无效token & 白名单
