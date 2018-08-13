@@ -43,6 +43,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/user/v1/user/resetPassword");
         whiteUrls.add("/user/v1/user/search");
         whiteUrls.add("/user/v1/user/check");
+        whiteUrls.add("/user/v1/appVersion/check");
         // 题库相关
         whiteUrls.add("/tk/v1/question/record");
         whiteUrls.add("/tk/v1/video/list");
