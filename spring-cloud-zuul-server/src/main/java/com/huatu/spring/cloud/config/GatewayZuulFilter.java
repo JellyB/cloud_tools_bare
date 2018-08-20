@@ -5,11 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.huatu.common.CommonResult;
+import com.huatu.tiku.springboot.users.support.SessionRedisTemplate;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -85,7 +85,7 @@ public class GatewayZuulFilter extends ZuulFilter {
     }
 
     @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    private SessionRedisTemplate sessionRedisTemplate;
 
     /**
      * per：路由之前
@@ -141,7 +141,7 @@ public class GatewayZuulFilter extends ZuulFilter {
             return null;
         } else {
             log.info("-------GatewayZuulFilter---token值:" + token);
-            Long id = Long.parseLong(Optional.ofNullable(stringRedisTemplate.opsForHash().get(token, "id")).orElse("0").toString());
+            Long id = Long.parseLong(Optional.ofNullable(sessionRedisTemplate.hget(token, "id")).orElse("0").toString());
             log.info("-------GatewayZuulFilter---用户id值:" + id);
             if (id == 0) {
             	// 传入无效token & 白名单
