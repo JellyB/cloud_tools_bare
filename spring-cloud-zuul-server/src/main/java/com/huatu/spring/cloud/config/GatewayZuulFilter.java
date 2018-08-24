@@ -81,6 +81,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/s/v1/hotWord/type/[A-Z_]+");
         // 课程相关
         whiteUrls.add("/c/v1/ic/courses/[0-9]+/getClassExt");
+        whiteUrls.add("/co/api/v1/aliPay/sync");
+        whiteUrls.add("/co/api/v1/weChatPayBack/sync/[0-9a-zA-Z]+");
         // 分享相关
         whiteUrls.add("/share/.+");
     }
