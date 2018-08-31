@@ -79,6 +79,10 @@
             <groupId>com.huatu.tiku.springboot</groupId>
             <artifactId>spring-boot-starter-users</artifactId>
         </dependency>
+        <dependency>
+			<groupId>com.huatu.springboot</groupId>
+			<artifactId>spring-boot-starter-web-register</artifactId>
+		</dependency>
     </dependencies>
 
 
