@@ -1,11 +1,19 @@
 spring:
   profiles:
     active: peer1
+
+---
+spring:
+  profiles: test
+
 debug: true
 
 ---
 spring:
   profiles: product
+
+debug: false
+
 eureka:
   client:
     fetch-registry: true
