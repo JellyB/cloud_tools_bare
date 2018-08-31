@@ -4,6 +4,11 @@ cd `dirname $0`
 
 # 使用自己的conf文件传递到spring启动脚本种
 source ./conf/run.conf
+ENV_CONF="./conf/run_${ENV}.conf";
+if [ -a  ${ENV_CONF} ]; then
+    echo 'there is a special env config:"'${ENV_CONF}'",will load it for override'
+    source ${ENV_CONF}
+fi
 
 
 DEPLOY_DIR=`pwd`
