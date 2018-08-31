@@ -117,3 +117,14 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://192.168.100.22:11003/eureka/
+
+---
+spring:
+  profiles: product
+  application:
+      name: ${server_name}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://peer1.eureka:11003/eureka/,http://peer2.eureka:11003/eureka/,http://peer3.eureka:11003/eureka/
