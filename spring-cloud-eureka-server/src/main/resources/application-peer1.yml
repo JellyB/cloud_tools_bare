@@ -8,7 +8,6 @@ server:
 eureka:
   instance:
     perferIpAddress: true
-    hostname: localhost
   client:
       fetch-registry: false
       register-with-eureka: false

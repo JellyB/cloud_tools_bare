@@ -94,6 +94,11 @@ hystrix:
         isolation: 
           thread: 
             timeoutInMilliseconds: 60000
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
 ---
 spring:
   sleuth:
