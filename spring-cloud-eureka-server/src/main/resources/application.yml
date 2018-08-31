@@ -1,6 +1,8 @@
 spring:
   profiles:
-    active: peer1
+    active: 
+    - peer1
+    - ${project.environment}
 
 ---
 spring:
