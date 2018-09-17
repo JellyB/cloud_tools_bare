@@ -88,6 +88,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/co/v1/comments/classId/[0-9]+/coursewareId/[0-9]+");
         whiteUrls.add("/co/api/v1/aliPay/sync");
         whiteUrls.add("/co/api/v1/weChatPayBack/sync/[0-9a-zA-Z]+");
+        whiteUrls.add("/co/v4/courses/teacher/[0-9]+");
+        whiteUrls.add("/co/v4/courses/teachers/[0-9]+");
         // 分享相关
         whiteUrls.add("/share/.+");
     }
