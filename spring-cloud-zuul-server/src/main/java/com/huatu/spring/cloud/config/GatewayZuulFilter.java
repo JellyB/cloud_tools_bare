@@ -145,8 +145,8 @@ public class GatewayZuulFilter extends ZuulFilter {
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
             JSONObject r = new JSONObject();
-            r.put("code", CommonResult.LOGIN_ON_OTHER_DEVICE_RECOMMENDED_CHANGE_PASSWD.getCode());
-            r.put("message", CommonResult.LOGIN_ON_OTHER_DEVICE_RECOMMENDED_CHANGE_PASSWD.getMessage());
+            r.put("code", CommonResult.PERMISSION_DENIED.getCode());
+            r.put("message", CommonResult.PERMISSION_DENIED.getMessage());
             ctx.setResponseBody(r.toJSONString());
             return null;
         } else {
@@ -161,8 +161,8 @@ public class GatewayZuulFilter extends ZuulFilter {
                 ctx.setSendZuulResponse(false);
                 ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
                 JSONObject r = new JSONObject();
-                r.put("code", CommonResult.PERMISSION_DENIED.getCode());
-                r.put("message", CommonResult.PERMISSION_DENIED.getMessage());
+                r.put("code", CommonResult.LOGIN_ON_OTHER_DEVICE_RECOMMENDED_CHANGE_PASSWD.getCode());
+                r.put("message", CommonResult.LOGIN_ON_OTHER_DEVICE_RECOMMENDED_CHANGE_PASSWD.getMessage());
                 ctx.setResponseBody(r.toJSONString());
                 return null;
             }
