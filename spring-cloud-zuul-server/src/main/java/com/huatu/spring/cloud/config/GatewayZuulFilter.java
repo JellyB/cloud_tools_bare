@@ -93,6 +93,10 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/co/v4/courses/classBeforeSyllabuses");
         // 分享相关
         whiteUrls.add("/share/.+");
+        //活动上报
+        whiteUrls.add("/tk/v1/activity/reportCount");
+        //广告上报
+        whiteUrls.add("/tk/v1/advert/reportCount");
     }
 
     @Autowired
