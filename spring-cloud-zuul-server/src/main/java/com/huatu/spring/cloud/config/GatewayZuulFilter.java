@@ -90,8 +90,13 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/co/api/v1/weChatPayBack/sync/[0-9a-zA-Z]+");
         whiteUrls.add("/co/v4/courses/teacher/[0-9]+");
         whiteUrls.add("/co/v4/courses/teachers/[0-9]+");
+        whiteUrls.add("/co/v4/courses/classBeforeSyllabuses");
         // 分享相关
         whiteUrls.add("/share/.+");
+        //活动上报
+        whiteUrls.add("/tk/v1/activity/reportCount");
+        //广告上报
+        whiteUrls.add("/tk/v1/advert/reportCount");
     }
 
     @Autowired
