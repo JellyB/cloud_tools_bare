@@ -26,6 +26,9 @@ zuul:
     api-share-server-o:
       path: /share/**
       serviceId: ic-share-server
+    api-score-server:
+      path: /score/**
+      url: http://192.168.100.22:23453/iv
   retryable: true  #路由重试
 ribbon:
 #  ribbon重试超时时间
