@@ -97,6 +97,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/activity/reportCount");
         //广告上报
         whiteUrls.add("/tk/v1/advert/reportCount");
+        // 内部接口全部通过
+        whiteUrls.add("/[a-zA-Z]+/cloud/[0-9a-zA-Z/]+");
     }
 
     @Autowired
