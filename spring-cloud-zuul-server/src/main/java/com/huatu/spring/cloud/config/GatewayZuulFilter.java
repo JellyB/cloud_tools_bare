@@ -97,6 +97,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/activity/reportCount");
         //广告上报
         whiteUrls.add("/tk/v1/advert/reportCount");
+        //机器打分获取规则自测
+        whiteUrls.add("/tk.v1/question/systemScoreRule/[0-9]+");
     }
 
     @Autowired
