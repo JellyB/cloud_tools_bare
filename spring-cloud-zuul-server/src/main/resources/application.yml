@@ -26,6 +26,9 @@ zuul:
     api-share-server-o:
       path: /share/**
       serviceId: ic-share-server
+    api-u-server:
+      path: /u/**
+      serviceId: http://123.103.86.52/u
   retryable: true  #路由重试
 ribbon:
 #  ribbon重试超时时间
@@ -139,3 +142,6 @@ zuul:
     api-course-server:
       path: /c/**
       url: http://192.168.100.212/c
+    api-u-server:
+      path: /u/**
+      url: https://ns.huatu.com/u
