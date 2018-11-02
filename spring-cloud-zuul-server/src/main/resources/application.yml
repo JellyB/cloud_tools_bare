@@ -28,7 +28,7 @@ zuul:
       serviceId: ic-share-server
     api-u-server:
       path: /u/**
-      serviceId: http://123.103.86.52/u
+      serviceId: http://192.168.100.22/u
   retryable: true  #路由重试
 ribbon:
 #  ribbon重试超时时间
