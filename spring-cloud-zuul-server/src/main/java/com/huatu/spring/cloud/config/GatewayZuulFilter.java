@@ -77,6 +77,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/report/detail/exam/[0-9]+");
         whiteUrls.add("/tk/v1/playRecord/report");
         whiteUrls.add("/tk/v1/comment/[0-9]+/list");
+        whiteUrls.add("/user/v1/attention/user/[0-9]+");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
