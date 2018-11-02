@@ -45,6 +45,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/user/v1/user/check");
         whiteUrls.add("/user/v1/appVersion/check");
         whiteUrls.add("/user/v1/attention/[0-9]+/fans");
+        whiteUrls.add("/u/v2/channel/cool");
         // 题库相关
         whiteUrls.add("/tk/v1/question/record");
         whiteUrls.add("/tk/v1/video/list");
