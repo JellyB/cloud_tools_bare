@@ -44,6 +44,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/user/v1/user/search");
         whiteUrls.add("/user/v1/user/check");
         whiteUrls.add("/user/v1/appVersion/check");
+        whiteUrls.add("/user/v1/attention/[0-9]+/fans");
+        whiteUrls.add("/u/v2/channel/cool");
         // 题库相关
         whiteUrls.add("/tk/v1/question/record");
         whiteUrls.add("/tk/v1/video/list");
@@ -75,6 +77,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/report/detail/practice/[0-9]+");
         whiteUrls.add("/tk/v1/report/detail/exam/[0-9]+");
         whiteUrls.add("/tk/v1/playRecord/report");
+        whiteUrls.add("/tk/v1/comment/[0-9]+/list");
+        whiteUrls.add("/user/v1/attention/user/[0-9]+");
         whiteUrls.add("/tk/v1/video/shareCount");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
@@ -98,6 +102,10 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/activity/reportCount");
         //广告上报
         whiteUrls.add("/tk/v1/advert/reportCount");
+        //机器打分获取规则自测
+        whiteUrls.add("/tk/v1/question/systemScoreRule/[0-9]+");
+        // 内部接口全部通过
+        whiteUrls.add("/[a-zA-Z]+/cloud/[0-9a-zA-Z/]+");
     }
 
     @Autowired
