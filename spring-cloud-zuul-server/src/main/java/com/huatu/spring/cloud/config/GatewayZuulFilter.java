@@ -45,6 +45,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/user/v1/user/check");
         whiteUrls.add("/user/v1/appVersion/check");
         whiteUrls.add("/user/v1/attention/[0-9]+/fans");
+        whiteUrls.add("/user/v1/dic/UserType");
         whiteUrls.add("/u/v2/channel/cool");
         // 题库相关
         whiteUrls.add("/tk/v1/question/record");
@@ -54,6 +55,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/question/newest");
         whiteUrls.add("/tk/v1/question/nationArea/[0-9]+");
         whiteUrls.add("/tk/v1/question/detail/[0-9]+");
+        whiteUrls.add("/tk/v1/question/details/[0-9]+");
         whiteUrls.add("/tk/v1/question/type/[0-9]+");
         whiteUrls.add("/tk/v1/question/type/root");
         whiteUrls.add("/tk/v1/question/type/noLeader");
@@ -81,13 +83,14 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/comment/[0-9]+/list");
         whiteUrls.add("/user/v1/attention/user/[0-9]+");
         whiteUrls.add("/tk/v1/video/shareCount");
+        whiteUrls.add("/tk/v1/video/detail/[0-9]+");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
         whiteUrls.add("/s/v1/hotWord/type/[A-Z_]+");
         // 课程相关
         whiteUrls.add("/c/v1/ic/courses/icClassList");
-    	whiteUrls.add("/c/v1/ic/courses/[0-9]+");
+    	  whiteUrls.add("/c/v1/ic/courses/[0-9]+");
         whiteUrls.add("/c/v1/ic/courses/[0-9]+/getClassExt");
         whiteUrls.add("/c/v1/ic/courses/[0-9]+");
         whiteUrls.add("/co/v1/comments/netClassId/[0-9]+");
