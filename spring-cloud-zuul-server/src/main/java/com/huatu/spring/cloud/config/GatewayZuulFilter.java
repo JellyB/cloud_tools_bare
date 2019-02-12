@@ -115,6 +115,9 @@ public class GatewayZuulFilter extends ZuulFilter {
     @Autowired
     private SessionRedisTemplate sessionRedisTemplate;
 
+    // token校验逻辑V2，将状态码统一改为200
+    private final String V2 = "1.0.1";
+
     /**
      * per：路由之前
      * routing：路由时
@@ -161,7 +164,13 @@ public class GatewayZuulFilter extends ZuulFilter {
             }
             log.info("-------GatewayZuulFilter---token为空");
             ctx.setSendZuulResponse(false);
-            ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
+
+            String cv = request.getHeader("cv");
+            if (V2.compareTo(cv) > 0) {
+                ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
+            } else {
+                ctx.setResponseStatusCode(HttpStatus.OK.value());
+            }
             JSONObject r = new JSONObject();
             r.put("code", CommonResult.PERMISSION_DENIED.getCode());
             r.put("message", CommonResult.PERMISSION_DENIED.getMessage());
@@ -177,7 +186,13 @@ public class GatewayZuulFilter extends ZuulFilter {
                     return null;
                 }
                 ctx.setSendZuulResponse(false);
-                ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
+
+                String cv = request.getHeader("cv");
+                if (V2.compareTo(cv) > 0) {
+                    ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
+                } else {
+                    ctx.setResponseStatusCode(HttpStatus.OK.value());
+                }
                 JSONObject r = new JSONObject();
                 r.put("code", CommonResult.LOGIN_ON_OTHER_DEVICE_RECOMMENDED_CHANGE_PASSWD.getCode());
                 r.put("message", CommonResult.LOGIN_ON_OTHER_DEVICE_RECOMMENDED_CHANGE_PASSWD.getMessage());
@@ -194,7 +209,6 @@ public class GatewayZuulFilter extends ZuulFilter {
                 ctx.setRequestQueryParams(requestParams);
             }
             requestParams.put("loginUserId", Arrays.asList(id + ""));
-
         }
         return null;
     }
