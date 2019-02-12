@@ -110,6 +110,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/question/systemScoreRule/[0-9]+");
         // 内部接口全部通过
         whiteUrls.add("/[a-zA-Z]+/cloud/[0-9a-zA-Z/]+");
+        // 钉钉接口
+        whiteUrls.add("/dt/[0-9a-zA-Z/]+");
     }
 
     @Autowired
