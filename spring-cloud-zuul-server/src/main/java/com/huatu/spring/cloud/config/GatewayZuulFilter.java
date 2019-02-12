@@ -90,7 +90,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/s/v1/hotWord/type/[A-Z_]+");
         // 课程相关
         whiteUrls.add("/c/v1/ic/courses/icClassList");
-    	  whiteUrls.add("/c/v1/ic/courses/[0-9]+");
+        whiteUrls.add("/c/v1/ic/courses/[0-9]+");
         whiteUrls.add("/c/v1/ic/courses/[0-9]+/getClassExt");
         whiteUrls.add("/c/v1/ic/courses/[0-9]+");
         whiteUrls.add("/co/v1/comments/netClassId/[0-9]+");
@@ -155,8 +155,8 @@ public class GatewayZuulFilter extends ZuulFilter {
 
         boolean whiteFlag = valueUrl(url);
         if (token == null) {
-        	// 未传token & 白名单
-            if(whiteFlag){
+            // 未传token & 白名单
+            if (whiteFlag) {
                 return null;
             }
             log.info("-------GatewayZuulFilter---token为空");
@@ -172,8 +172,8 @@ public class GatewayZuulFilter extends ZuulFilter {
             Long id = Long.parseLong(Optional.ofNullable(sessionRedisTemplate.hget(token, "id")).orElse("0").toString());
             log.info("-------GatewayZuulFilter---用户id值:" + id);
             if (id == 0) {
-            	// 传入无效token & 白名单
-            	if(whiteFlag){
+                // 传入无效token & 白名单
+                if (whiteFlag) {
                     return null;
                 }
                 ctx.setSendZuulResponse(false);
@@ -190,8 +190,8 @@ public class GatewayZuulFilter extends ZuulFilter {
             ctx.getRequest().getParameterMap();
             Map<String, List<String>> requestParams = ctx.getRequestQueryParams();
             if (requestParams == null) {
-            	requestParams = Maps.newHashMap();
-            	ctx.setRequestQueryParams(requestParams);
+                requestParams = Maps.newHashMap();
+                ctx.setRequestQueryParams(requestParams);
             }
             requestParams.put("loginUserId", Arrays.asList(id + ""));
 
@@ -199,25 +199,24 @@ public class GatewayZuulFilter extends ZuulFilter {
         return null;
     }
 
-	/**
-	 * 检查路由是否在白名单
-	 * 
-	 * @param url
-	 *            路由
-	 * @return true/false
-	 */
-	private boolean valueUrl(String url) {
-		if (url.endsWith("/")) {
-			url = url.substring(0, url.length() - 1);
-		}
+    /**
+     * 检查路由是否在白名单
+     *
+     * @param url 路由
+     * @return true/false
+     */
+    private boolean valueUrl(String url) {
+        if (url.endsWith("/")) {
+            url = url.substring(0, url.length() - 1);
+        }
 
-		for (String routeReg : whiteUrls) {
-			if (url.matches(routeReg)) {
-				return true;
-			}
-		}
+        for (String routeReg : whiteUrls) {
+            if (url.matches(routeReg)) {
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
 }
