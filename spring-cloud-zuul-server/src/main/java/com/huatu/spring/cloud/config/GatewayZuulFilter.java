@@ -108,8 +108,6 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/advert/reportCount");
         //机器打分获取规则自测
         whiteUrls.add("/tk/v1/question/systemScoreRule/[0-9]+");
-        // 内部接口全部通过
-        whiteUrls.add("/[a-zA-Z]+/cloud/[0-9a-zA-Z/]+");
         // 钉钉小程序接口
         whiteUrls.add("/dtmp/[0-9a-zA-Z/]+");
     }
