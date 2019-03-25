@@ -84,6 +84,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/user/v1/attention/user/[0-9]+");
         whiteUrls.add("/tk/v1/video/shareCount");
         whiteUrls.add("/tk/v1/video/detail/[0-9]+");
+        whiteUrls.add("/tk/v1/comment/ms");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
