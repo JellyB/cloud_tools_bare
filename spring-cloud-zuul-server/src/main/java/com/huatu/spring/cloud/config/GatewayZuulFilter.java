@@ -84,13 +84,14 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/user/v1/attention/user/[0-9]+");
         whiteUrls.add("/tk/v1/video/shareCount");
         whiteUrls.add("/tk/v1/video/detail/[0-9]+");
+        whiteUrls.add("/tk/v1/comment/ms");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
         whiteUrls.add("/s/v1/hotWord/type/[A-Z_]+");
         // 课程相关
         whiteUrls.add("/c/v1/ic/courses/icClassList");
-    	  whiteUrls.add("/c/v1/ic/courses/[0-9]+");
+        whiteUrls.add("/c/v1/ic/courses/[0-9]+");
         whiteUrls.add("/c/v1/ic/courses/[0-9]+/getClassExt");
         whiteUrls.add("/c/v1/ic/courses/[0-9]+");
         whiteUrls.add("/co/v1/comments/netClassId/[0-9]+");
@@ -108,12 +109,17 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/advert/reportCount");
         //机器打分获取规则自测
         whiteUrls.add("/tk/v1/question/systemScoreRule/[0-9]+");
-        // 内部接口全部通过
-        whiteUrls.add("/[a-zA-Z]+/cloud/[0-9a-zA-Z/]+");
+        // 钉钉小程序接口
+        whiteUrls.add("/dtmp/[0-9a-zA-Z/]+");
+        // 后台添加评论
+        whiteUrls.add("/tk/v1/comment/ms");
     }
 
     @Autowired
     private SessionRedisTemplate sessionRedisTemplate;
+
+    // token校验逻辑V2，将状态码统一改为200
+    private final String V2 = "1.0.1";
 
     /**
      * per：路由之前
@@ -155,13 +161,19 @@ public class GatewayZuulFilter extends ZuulFilter {
 
         boolean whiteFlag = valueUrl(url);
         if (token == null) {
-        	// 未传token & 白名单
-            if(whiteFlag){
+            // 未传token & 白名单
+            if (whiteFlag) {
                 return null;
             }
             log.info("-------GatewayZuulFilter---token为空");
             ctx.setSendZuulResponse(false);
-            ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
+
+            String cv = request.getHeader("cv");
+            if (V2.compareTo(cv) > 0) {
+                ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
+            } else {
+                ctx.setResponseStatusCode(HttpStatus.OK.value());
+            }
             JSONObject r = new JSONObject();
             r.put("code", CommonResult.PERMISSION_DENIED.getCode());
             r.put("message", CommonResult.PERMISSION_DENIED.getMessage());
@@ -172,12 +184,18 @@ public class GatewayZuulFilter extends ZuulFilter {
             Long id = Long.parseLong(Optional.ofNullable(sessionRedisTemplate.hget(token, "id")).orElse("0").toString());
             log.info("-------GatewayZuulFilter---用户id值:" + id);
             if (id == 0) {
-            	// 传入无效token & 白名单
-            	if(whiteFlag){
+                // 传入无效token & 白名单
+                if (whiteFlag) {
                     return null;
                 }
                 ctx.setSendZuulResponse(false);
-                ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
+
+                String cv = request.getHeader("cv");
+                if (V2.compareTo(cv) > 0) {
+                    ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
+                } else {
+                    ctx.setResponseStatusCode(HttpStatus.OK.value());
+                }
                 JSONObject r = new JSONObject();
                 r.put("code", CommonResult.LOGIN_ON_OTHER_DEVICE_RECOMMENDED_CHANGE_PASSWD.getCode());
                 r.put("message", CommonResult.LOGIN_ON_OTHER_DEVICE_RECOMMENDED_CHANGE_PASSWD.getMessage());
@@ -190,6 +208,7 @@ public class GatewayZuulFilter extends ZuulFilter {
             ctx.getRequest().getParameterMap();
             Map<String, List<String>> requestParams = ctx.getRequestQueryParams();
             if (requestParams == null) {
+<<<<<<< HEAD
             	requestParams = Maps.newHashMap();
                 requestParams.put("loginUserId", Arrays.asList(id + ""));
             	ctx.setRequestQueryParams(requestParams);
@@ -198,29 +217,34 @@ public class GatewayZuulFilter extends ZuulFilter {
             }
 
 
+=======
+                requestParams = Maps.newHashMap();
+                ctx.setRequestQueryParams(requestParams);
+            }
+            requestParams.put("loginUserId", Arrays.asList(id + ""));
+>>>>>>> 853d7efc9f170e33b83eccdec6286f121afbaea9
         }
         return null;
     }
 
-	/**
-	 * 检查路由是否在白名单
-	 * 
-	 * @param url
-	 *            路由
-	 * @return true/false
-	 */
-	private boolean valueUrl(String url) {
-		if (url.endsWith("/")) {
-			url = url.substring(0, url.length() - 1);
-		}
+    /**
+     * 检查路由是否在白名单
+     *
+     * @param url 路由
+     * @return true/false
+     */
+    private boolean valueUrl(String url) {
+        if (url.endsWith("/")) {
+            url = url.substring(0, url.length() - 1);
+        }
 
-		for (String routeReg : whiteUrls) {
-			if (url.matches(routeReg)) {
-				return true;
-			}
-		}
+        for (String routeReg : whiteUrls) {
+            if (url.matches(routeReg)) {
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
 }

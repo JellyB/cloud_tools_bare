@@ -29,6 +29,9 @@ zuul:
     api-u-server:
       path: /u/**
       serviceId: http://192.168.100.22/u
+    api-dtmp-server:
+      path: /dtmp/**
+      serviceId: ic-dtmp-server
   retryable: true  #路由重试
 ribbon:
 #  ribbon重试超时时间
@@ -104,13 +107,11 @@ eureka:
 
 ---
 spring:
-  sleuth:
-    base-ur: http://127.0.0.1:10824
-    sampler:
-      percentage: 1.0
   profiles: dev
+
   application:
-     name: spring-cloud-zuul-server-local-laobo
+     name: ${server_name}-local
+
 eureka:
   client:
     serviceUrl:
@@ -119,8 +120,10 @@ eureka:
 ---
 spring:
   profiles: test
+
   application:
       name: ${server_name}
+
 eureka:
   client:
     serviceUrl:
@@ -128,7 +131,29 @@ eureka:
 
 ---
 spring:
+  profiles: pre
+
+  application:
+    name: ${server_name}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.100.50:11003/eureka/
+
+zuul:
+  routes:
+    api-course-server:
+      path: /c/**
+      url: http://192.168.100.212/c
+    api-u-server:
+      path: /u/**
+      url: https://ns.huatu.com/u
+
+---
+spring:
   profiles: product
+
   application:
       name: ${server_name}
 
