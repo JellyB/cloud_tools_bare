@@ -94,6 +94,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/commentCommodity");
         whiteUrls.add("/tk/v1/rechargeInstruction/info");
         whiteUrls.add("/tk/v1/examCommodity/[A-Z_]+");
+        whiteUrls.add("/tk/v1/commodityOrder/aliPayCallback");
+        whiteUrls.add("/tk/v1/commodityOrder/wxPayCallback");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
