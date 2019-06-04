@@ -79,6 +79,7 @@
 
 
     <build>
+        <finalName>${server_name}</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -102,8 +103,8 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.4.RELEASE</version>
                 <configuration>
-                    <finalName>${server_name}</finalName>
                     <mainClass>com.huatu.spring.cloud.SpringCloudZuulServerApplication</mainClass>
                     <layout>ZIP</layout>
                     <embeddedLaunchScriptProperties>

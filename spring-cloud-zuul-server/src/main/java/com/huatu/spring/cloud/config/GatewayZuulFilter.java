@@ -31,6 +31,103 @@ public class GatewayZuulFilter extends ZuulFilter {
 
     private static List<String> whiteUrls;
 
+    static {
+        whiteUrls = Lists.newArrayList();
+        // 获取验证码 登陆
+        whiteUrls.add("/user/v1/user/phoneCode");
+        whiteUrls.add("/user/v1/user/phoneLogin");
+        whiteUrls.add("/user/v1/user/login");
+        whiteUrls.add("/user/v1/user/thirdLogin");
+        whiteUrls.add("/user/v1/user/info/[0-9]+");
+        whiteUrls.add("/user/v1/user/register");
+        whiteUrls.add("/user/v1/user/resetPassword");
+        whiteUrls.add("/user/v1/user/search");
+        whiteUrls.add("/user/v1/user/check");
+        whiteUrls.add("/user/v1/appVersion/check");
+        whiteUrls.add("/user/v1/attention/[0-9]+/fans");
+        whiteUrls.add("/user/v1/dic/UserType");
+        whiteUrls.add("/u/v2/channel/cool");
+        // 题库相关
+        whiteUrls.add("/tk/v1/question/record");
+        whiteUrls.add("/tk/v1/video/list");
+        whiteUrls.add("/tk/v1/video/answer");
+        whiteUrls.add("/tk/v1/advert/[0-9]+");
+        whiteUrls.add("/tk/v1/question/newest");
+        whiteUrls.add("/tk/v1/question/nationArea/[0-9]+");
+        whiteUrls.add("/tk/v1/question/detail/[0-9]+");
+        whiteUrls.add("/tk/v1/question/details/[0-9]+");
+        whiteUrls.add("/tk/v1/question/type/[0-9]+");
+        whiteUrls.add("/tk/v1/question/type/root");
+        whiteUrls.add("/tk/v2/question/type/root");
+        whiteUrls.add("/tk/v1/question/type/noLeader");
+        whiteUrls.add("/tk/v1/exam/list");
+        whiteUrls.add("/tk/v1/exam/rule");
+        whiteUrls.add("/tk/v1/position/[0-9]+");
+        whiteUrls.add("/tk/v1/dic/[a-zA-Z]+");
+        whiteUrls.add("/tk/v1/organization/[0-9]+/child");
+        whiteUrls.add("/tk/v1/position/option/label/");
+        whiteUrls.add("/tk/v1/position/[0-9]+/exercise");
+        whiteUrls.add("/tk/v1/position/course");
+        whiteUrls.add("/tk/v1/nationArea/[A-Z_]+");
+        whiteUrls.add("/tk/v1/organization/type/[A-Z_]+");
+        whiteUrls.add("/tk/v1/position/[0-9]+/tag/[A-Z_]+");
+        whiteUrls.add("/tk/v1/position/option/label");
+        whiteUrls.add("/tk/v1/reference/[0-9]+/[A-Z_]+");
+        whiteUrls.add("/tk/v1/question/type/[0-9]+/children");
+        whiteUrls.add("/tk/v1/hotWord/type/[0-9]+");
+        whiteUrls.add("/tk/v1/image");
+        whiteUrls.add("/tk/v1/question/search");
+        whiteUrls.add("/tk/v1/question/validate/[0-9]+");
+        whiteUrls.add("/tk/v1/report/detail/practice/[0-9]+");
+        whiteUrls.add("/tk/v1/report/detail/exam/[0-9]+");
+        whiteUrls.add("/tk/v1/playRecord/report");
+        whiteUrls.add("/tk/v1/comment/[0-9]+/list");
+        whiteUrls.add("/user/v1/attention/user/[0-9]+");
+        whiteUrls.add("/tk/v1/video/shareCount");
+        whiteUrls.add("/tk/v1/video/detail/[0-9]+");
+        whiteUrls.add("/tk/v1/comment/ms");
+        whiteUrls.add("/tk/v1/question/audio/[0-9]+");
+        whiteUrls.add("/tk/interview/[0-9a-zA-Z/]+");
+        whiteUrls.add("/tk/v1/TProduct");
+        whiteUrls.add("/tk/v1/TProduct/wxPayCallback");
+        whiteUrls.add("/tk/v1/TProduct/aliPayCallback");
+        whiteUrls.add("/tk/v1/commentCommodity");
+        whiteUrls.add("/tk/v1/rechargeInstruction/info");
+        whiteUrls.add("/tk/v1/examCommodity/[A-Z_]+");
+        whiteUrls.add("/tk/v1/commodityOrder/aliPayCallback");
+        whiteUrls.add("/tk/v1/commodityOrder/wxPayCallback");
+        // 搜索相关
+        whiteUrls.add("/s/v1/user/search");
+        whiteUrls.add("/s/v1/question/search");
+        whiteUrls.add("/s/v1/hotWord/type/[A-Z_]+");
+        // 课程相关
+        whiteUrls.add("/c/v1/ic/courses/icClassList");
+        whiteUrls.add("/c/v1/ic/courses/[0-9]+");
+        whiteUrls.add("/c/v1/ic/courses/[0-9]+/getClassExt");
+        whiteUrls.add("/c/v1/ic/courses/[0-9]+");
+        whiteUrls.add("/co/v1/comments/netClassId/[0-9]+");
+        whiteUrls.add("/co/v1/comments/classId/[0-9]+/coursewareId/[0-9]+");
+        whiteUrls.add("/co/api/v1/aliPay/sync");
+        whiteUrls.add("/co/api/v1/weChatPayBack/sync/[0-9a-zA-Z]+");
+        whiteUrls.add("/co/v4/courses/teacher/[0-9]+");
+        whiteUrls.add("/co/v4/courses/teachers/[0-9]+");
+        whiteUrls.add("/co/v4/courses/classBeforeSyllabuses");
+        // 分享相关
+        whiteUrls.add("/share/.+");
+        //活动上报
+        whiteUrls.add("/tk/v1/activity/reportCount");
+        //广告上报
+        whiteUrls.add("/tk/v1/advert/reportCount");
+        //机器打分获取规则自测
+        whiteUrls.add("/tk/v1/question/systemScoreRule/[0-9]+");
+        // 钉钉小程序接口
+        whiteUrls.add("/dtmp/[0-9a-zA-Z/]+");
+        // 后台添加评论
+        whiteUrls.add("/tk/v1/comment/ms");
+        // 百家云视频回调
+        whiteUrls.add("/tk/v1//video/transfer");
+    }
+
     @Autowired
     private SessionRedisTemplate sessionRedisTemplate;
 
@@ -152,92 +249,6 @@ public class GatewayZuulFilter extends ZuulFilter {
         }
 
         return false;
-    }
-
-    static {
-        whiteUrls = Lists.newArrayList();
-        // 获取验证码 登陆
-        whiteUrls.add("/user/v1/user/phoneCode");
-        whiteUrls.add("/user/v1/user/phoneLogin");
-        whiteUrls.add("/user/v1/user/login");
-        whiteUrls.add("/user/v1/user/thirdLogin");
-        whiteUrls.add("/user/v1/user/info/[0-9]+");
-        whiteUrls.add("/user/v1/user/register");
-        whiteUrls.add("/user/v1/user/resetPassword");
-        whiteUrls.add("/user/v1/user/search");
-        whiteUrls.add("/user/v1/user/check");
-        whiteUrls.add("/user/v1/appVersion/check");
-        whiteUrls.add("/user/v1/attention/[0-9]+/fans");
-        whiteUrls.add("/user/v1/dic/UserType");
-        whiteUrls.add("/u/v2/channel/cool");
-        // 题库相关
-        whiteUrls.add("/tk/v1/question/record");
-        whiteUrls.add("/tk/v1/video/list");
-        whiteUrls.add("/tk/v1/video/answer");
-        whiteUrls.add("/tk/v1/advert/[0-9]+");
-        whiteUrls.add("/tk/v1/question/newest");
-        whiteUrls.add("/tk/v1/question/nationArea/[0-9]+");
-        whiteUrls.add("/tk/v1/question/detail/[0-9]+");
-        whiteUrls.add("/tk/v1/question/details/[0-9]+");
-        whiteUrls.add("/tk/v1/question/type/[0-9]+");
-        whiteUrls.add("/tk/v1/question/type/root");
-        whiteUrls.add("/tk/v1/question/type/noLeader");
-        whiteUrls.add("/tk/v1/exam/list");
-        whiteUrls.add("/tk/v1/exam/rule");
-        whiteUrls.add("/tk/v1/position/[0-9]+");
-        whiteUrls.add("/tk/v1/dic/[a-zA-Z]+");
-        whiteUrls.add("/tk/v1/organization/[0-9]+/child");
-        whiteUrls.add("/tk/v1/position/option/label/");
-        whiteUrls.add("/tk/v1/position/[0-9]+/exercise");
-        whiteUrls.add("/tk/v1/position/course");
-        whiteUrls.add("/tk/v1/nationArea/[A-Z_]+");
-        whiteUrls.add("/tk/v1/organization/type/[A-Z_]+");
-        whiteUrls.add("/tk/v1/position/[0-9]+/tag/[A-Z_]+");
-        whiteUrls.add("/tk/v1/position/option/label");
-        whiteUrls.add("/tk/v1/reference/[0-9]+/[A-Z_]+");
-        whiteUrls.add("/tk/v1/question/type/[0-9]+/children");
-        whiteUrls.add("/tk/v1/hotWord/type/[0-9]+");
-        whiteUrls.add("/tk/v1/image");
-        whiteUrls.add("/tk/v1/question/search");
-        whiteUrls.add("/tk/v1/question/validate/[0-9]+");
-        whiteUrls.add("/tk/v1/report/detail/practice/[0-9]+");
-        whiteUrls.add("/tk/v1/report/detail/exam/[0-9]+");
-        whiteUrls.add("/tk/v1/playRecord/report");
-        whiteUrls.add("/tk/v1/comment/[0-9]+/list");
-        whiteUrls.add("/user/v1/attention/user/[0-9]+");
-        whiteUrls.add("/tk/v1/video/shareCount");
-        whiteUrls.add("/tk/v1/video/detail/[0-9]+");
-        whiteUrls.add("/tk/v1/comment/ms");
-        // 搜索相关
-        whiteUrls.add("/s/v1/user/search");
-        whiteUrls.add("/s/v1/question/search");
-        whiteUrls.add("/s/v1/hotWord/type/[A-Z_]+");
-        // 课程相关
-        whiteUrls.add("/c/v1/ic/courses/icClassList");
-        whiteUrls.add("/c/v1/ic/courses/[0-9]+");
-        whiteUrls.add("/c/v1/ic/courses/[0-9]+/getClassExt");
-        whiteUrls.add("/c/v1/ic/courses/[0-9]+");
-        whiteUrls.add("/co/v1/comments/netClassId/[0-9]+");
-        whiteUrls.add("/co/v1/comments/classId/[0-9]+/coursewareId/[0-9]+");
-        whiteUrls.add("/co/api/v1/aliPay/sync");
-        whiteUrls.add("/co/api/v1/weChatPayBack/sync/[0-9a-zA-Z]+");
-        whiteUrls.add("/co/v4/courses/teacher/[0-9]+");
-        whiteUrls.add("/co/v4/courses/teachers/[0-9]+");
-        whiteUrls.add("/co/v4/courses/classBeforeSyllabuses");
-        // 分享相关
-        whiteUrls.add("/share/.+");
-        //活动上报
-        whiteUrls.add("/tk/v1/activity/reportCount");
-        //广告上报
-        whiteUrls.add("/tk/v1/advert/reportCount");
-        //机器打分获取规则自测
-        whiteUrls.add("/tk/v1/question/systemScoreRule/[0-9]+");
-        // 钉钉小程序接口
-        whiteUrls.add("/dtmp/[0-9a-zA-Z/]+");
-        // 后台添加评论
-        whiteUrls.add("/tk/v1/comment/ms");
-        //百家云回调
-        whiteUrls.add("/tk/v1/video/transfer");
     }
 
 }

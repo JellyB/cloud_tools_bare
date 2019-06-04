@@ -81,6 +81,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>1.5.4.RELEASE</version>
 				<configuration>
 					<finalName>${server_name}</finalName>
 					<mainClass>com.huatu.spring.cloud.SpringCloudEurekaServerApplication</mainClass>
