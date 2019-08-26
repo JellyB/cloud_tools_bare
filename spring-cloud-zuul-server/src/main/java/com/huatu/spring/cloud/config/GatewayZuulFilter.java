@@ -47,6 +47,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/user/v1/attention/[0-9]+/fans");
         whiteUrls.add("/user/v1/dic/UserType");
         whiteUrls.add("/u/v2/channel/cool");
+        whiteUrls.add("/user/v2/user/thirdLogin");
+        whiteUrls.add("/user/v1/user/thirdReg");
         // 题库相关
         whiteUrls.add("/tk/v1/question/record");
         whiteUrls.add("/tk/v1/video/list");
@@ -88,6 +90,14 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/comment/ms");
         whiteUrls.add("/tk/v1/question/audio/[0-9]+");
         whiteUrls.add("/tk/interview/[0-9a-zA-Z/]+");
+        whiteUrls.add("/tk/v1/TProduct");
+        whiteUrls.add("/tk/v1/TProduct/wxPayCallback");
+        whiteUrls.add("/tk/v1/TProduct/aliPayCallback");
+        whiteUrls.add("/tk/v1/commentCommodity");
+        whiteUrls.add("/tk/v1/rechargeInstruction/info");
+        whiteUrls.add("/tk/v1/examCommodity/[A-Z_]+");
+        whiteUrls.add("/tk/v1/commodityOrder/aliPayCallback");
+        whiteUrls.add("/tk/v1/commodityOrder/wxPayCallback");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
@@ -116,6 +126,8 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/dtmp/[0-9a-zA-Z/]+");
         // 后台添加评论
         whiteUrls.add("/tk/v1/comment/ms");
+        // 百家云视频回调
+        whiteUrls.add("/tk/v1//video/transfer");
         //神策埋点
         whiteUrls.add("/tk/v1/sensors/question/info/[0-9]+");
         whiteUrls.add("/tk/v1/sensors/examRoom/info/[0-9]+");
