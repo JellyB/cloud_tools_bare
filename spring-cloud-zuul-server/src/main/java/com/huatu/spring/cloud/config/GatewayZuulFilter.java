@@ -98,6 +98,12 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/examCommodity/[A-Z_]+");
         whiteUrls.add("/tk/v1/commodityOrder/aliPayCallback");
         whiteUrls.add("/tk/v1/commodityOrder/wxPayCallback");
+        whiteUrls.add("/tk/v1/referenceMaterial/modules");
+        whiteUrls.add("/tk/v1/referenceMaterial/moduleInfo");
+        whiteUrls.add("/tk/v1/referenceMaterial/categories");
+        whiteUrls.add("/tk/v1/referenceMaterial");
+        whiteUrls.add("/tk/v1/referenceMaterial/[0-9]+");
+        whiteUrls.add("/tk/v1/referenceMaterial/browseRecord/[0-9]+");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
