@@ -122,6 +122,11 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/co/v4/courses/teacher/[0-9]+");
         whiteUrls.add("/co/v4/courses/teachers/[0-9]+");
         whiteUrls.add("/co/v4/courses/classBeforeSyllabuses");
+
+        //资料评论
+        whiteUrls.add("/tk/v1/material/comment/list");
+        whiteUrls.add("/tk/v1/material/comment/detail");
+
         // 分享相关
         whiteUrls.add("/share/.+");
         //活动上报
