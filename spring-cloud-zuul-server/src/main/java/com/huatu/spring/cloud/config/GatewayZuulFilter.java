@@ -140,7 +140,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         // 后台添加评论
         whiteUrls.add("/tk/v1/comment/ms");
         // 百家云视频回调
-        whiteUrls.add("/tk/v1//video/transfer");
+        whiteUrls.add("/tk/v1/video/transfer");
         //神策埋点
         whiteUrls.add("/tk/v1/sensors/question/info/[0-9]+");
         whiteUrls.add("/tk/v1/sensors/examRoom/info/[0-9]+");
