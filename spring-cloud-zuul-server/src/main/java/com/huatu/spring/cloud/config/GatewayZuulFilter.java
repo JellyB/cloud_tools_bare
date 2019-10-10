@@ -66,6 +66,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/exam/rule");
         whiteUrls.add("/tk/v1/position/[0-9]+");
         whiteUrls.add("/tk/v1/dic/[a-zA-Z]+");
+        whiteUrls.add("/tk/v2/dic/[a-zA-Z]+");
         whiteUrls.add("/tk/v1/organization/[0-9]+/child");
         whiteUrls.add("/tk/v1/position/option/label/");
         whiteUrls.add("/tk/v1/position/[0-9]+/exercise");
