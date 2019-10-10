@@ -9,6 +9,7 @@ import com.huatu.tiku.springboot.users.support.SessionRedisTemplate;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -224,11 +225,16 @@ public class GatewayZuulFilter extends ZuulFilter {
                 ctx.setSendZuulResponse(false);
 
                 String cv = request.getHeader("cv");
-                if (V2.compareTo(cv) > 0) {
-                    ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
+                if(StringUtils.isNotBlank(cv)){
+                    if (V2.compareTo(cv) > 0) {
+                        ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
+                    } else {
+                        ctx.setResponseStatusCode(HttpStatus.OK.value());
+                    }
                 } else {
                     ctx.setResponseStatusCode(HttpStatus.OK.value());
                 }
+
                 JSONObject r = new JSONObject();
                 r.put("code", CommonResult.LOGIN_ON_OTHER_DEVICE_RECOMMENDED_CHANGE_PASSWD.getCode());
                 r.put("message", CommonResult.LOGIN_ON_OTHER_DEVICE_RECOMMENDED_CHANGE_PASSWD.getMessage());
