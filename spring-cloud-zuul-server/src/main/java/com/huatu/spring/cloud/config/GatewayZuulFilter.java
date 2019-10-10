@@ -126,6 +126,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         //资料评论
         whiteUrls.add("/tk/v1/material/comment/list");
         whiteUrls.add("/tk/v1/material/comment/detail");
+        whiteUrls.add("/tk/v1/material/comment/[0-9]+");
 
         // 分享相关
         whiteUrls.add("/share/.+");
