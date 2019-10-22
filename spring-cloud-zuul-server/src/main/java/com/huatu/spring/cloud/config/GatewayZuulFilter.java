@@ -109,9 +109,6 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/questionTopic/[0-9]+");
         whiteUrls.add("/tk/v1/questionTopic/question");
         whiteUrls.add("/tk/v1/person/dynamic");
-        whiteUrls.add("/tk/v1/person/comment");
-        whiteUrls.add("/tk/v1/person/like");
-        whiteUrls.add("/tk/v1/person/collection");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
