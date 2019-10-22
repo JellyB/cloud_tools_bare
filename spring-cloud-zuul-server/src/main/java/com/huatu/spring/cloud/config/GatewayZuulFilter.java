@@ -112,6 +112,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/person/comment");
         whiteUrls.add("/tk/v1/person/like");
         whiteUrls.add("/tk/v1/person/collection");
+        whiteUrls.add("/tk/v1/referenceMaterial/browseRecord/[0-9]+");
         // 搜索相关
         whiteUrls.add("/s/v1/user/search");
         whiteUrls.add("/s/v1/question/search");
