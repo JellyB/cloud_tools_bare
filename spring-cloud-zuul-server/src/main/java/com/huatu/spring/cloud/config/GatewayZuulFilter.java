@@ -151,6 +151,9 @@ public class GatewayZuulFilter extends ZuulFilter {
         //神策埋点
         whiteUrls.add("/tk/v1/sensors/question/info/[0-9]+");
         whiteUrls.add("/tk/v1/sensors/examRoom/info/[0-9]+");
+
+        // TODO 临时添加
+        whiteUrls.add("/co/cloud/v1/course/checkCourses");
     }
 
     @Autowired
