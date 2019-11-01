@@ -153,7 +153,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/sensors/examRoom/info/[0-9]+");
 
         // TODO 临时添加
-        whiteUrls.add("/co/cloud/v1/course/checkCourses");
+        whiteUrls.add("/co/cloud/v1/course/[0-9a-zA-Z]+");
     }
 
     @Autowired
