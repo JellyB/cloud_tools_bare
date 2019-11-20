@@ -113,6 +113,11 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/referenceMaterial/browseRecord/[0-9]+");
         whiteUrls.add("/tk/v1/bjyMedia/playRecord/[0-9]+");
         whiteUrls.add("/tk/v1/referenceMaterial/search");
+        whiteUrls.add("/tk/v1/course/examTypes");
+        whiteUrls.add("/tk/v1/course/nationAreas");
+        whiteUrls.add("/tk/v1/course");
+        whiteUrls.add("/tk/v1/course/[0-9]+");
+        whiteUrls.add("/tk/v1/course/teachers");
         whiteUrls.add("/tk/v1/courseOrder/aliPayCallback");
         whiteUrls.add("/tk/v1/courseOrder/wxPayCallback");
         // 搜索相关
