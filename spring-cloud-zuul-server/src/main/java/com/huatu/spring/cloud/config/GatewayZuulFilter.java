@@ -113,8 +113,7 @@ public class GatewayZuulFilter extends ZuulFilter {
         whiteUrls.add("/tk/v1/referenceMaterial/browseRecord/[0-9]+");
         whiteUrls.add("/tk/v1/bjyMedia/playRecord/[0-9]+");
         whiteUrls.add("/tk/v1/referenceMaterial/search");
-        whiteUrls.add("/tk/v1/course/examTypes");
-        whiteUrls.add("/tk/v1/course/nationAreas");
+        whiteUrls.add("/tk/v1/course/options");
         whiteUrls.add("/tk/v1/course");
         whiteUrls.add("/tk/v1/course/[0-9]+");
         whiteUrls.add("/tk/v1/course/teachers");
